@@ -41,9 +41,6 @@
   },
   "config": {
     "host": "localhost",
-    "port": 3000,
-    "ghooks": {
-      "pre-commit": "npm run lint"
-    }
+    "port": 3000
   }
 }
