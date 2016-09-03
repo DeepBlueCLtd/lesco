@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
-const L = require('leaflet');
+
 
 const GoldenLayout = require('golden-layout');
 
