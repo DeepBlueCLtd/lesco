@@ -12,7 +12,8 @@ const layoutConfig = {
         hasHeaders: true
     },
     dimensions: {
-        borderWidth: 2
+        borderWidth: 2,
+        headerHeight: 25
     },
     content: [{
         type: 'row',
@@ -22,11 +23,11 @@ const layoutConfig = {
             content: [{
                 type: 'react-component',
                 component: 'Search Criteria',
-                 title : 'Search Criteria'
+                title: 'Search Criteria'
             }, {
                     type: 'react-component',
                     component: 'Alert Wall',
-                     title : 'Alert Wall'
+                    title: 'Alert Wall'
                 }
             ]
         }, {
@@ -40,19 +41,19 @@ const layoutConfig = {
                         content: [{
                             type: 'react-component',
                             component: 'Table',
-                            title : 'Table'
+                            title: 'Table'
                         }, {
                                 type: 'react-component',
                                 component: 'Map',
-                                 title : 'Map'
+                                title: 'Map'
                             }, {
                                 type: 'react-component',
                                 component: 'Cloud',
-                                 title : 'Cloud'
+                                title: 'Cloud'
                             }, {
                                 type: 'react-component',
                                 component: 'Histogram',
-                                 title : 'Histogram'
+                                title: 'Histogram'
                             }]
                     }]
                 }]
@@ -64,7 +65,7 @@ export default class MainLayout extends Component {
 
     componentDidMount() {
         const temp = React.createClass({
-            render:  () => {
+            render: () => {
                 return (<h1>test component 3</h1>)
             }
         })
