@@ -20,6 +20,73 @@
             .lm_tab {
                 height: 19px !important;
             }
+            /******************************************************************************/
+            /**  Query Builder Style********************************************************************/
+            /******************************************************************************/
+            
+            .rule,
+            .ruleGroup .ruleGroup {
+                margin-top: 0.5rem;
+                margin-left: 1rem;
+                padding: 0.5rem;
+                border-radius: 4px;
+            }
+            .ruleGroup-combinators
+            {
+                max-width : 100px;
+                display:inline-block;
+            }
+            .ruleGroup-addRule
+            {
+                float:right;
+            }
+             .ruleGroup-addGroup
+            {
+                float:right;
+            }
+            .rule {
+                position : relative;
+                border: 1px solid rgba(100, 100, 100, 0.3);
+                background: rgba(255, 250, 250, 1);
+            }
+            .rule select{
+                display:inline-block;
+                min-width:120px;
+                width:30% 
+            }
+            .rule-remove{
+                position:absolute;
+                right: 5px;
+                top:5px;
+              
+            }
+            .rule-operators{
+                width:30% ;
+                min-width:120px
+                margin-left:5px;
+                margin-right:5px;
+            }
+            .ruleGroup {
+               
+                padding: 0.5em;
+                border: 2px solid rgba(100, 100, 100, 0.3);
+                border-radius: 4px;
+                background: rgba(100, 100, 100, 0.1);
+            }
+            
+            .group--header:after,
+            .rule--header:after,
+            .rule--body:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
         </style>
 
 
