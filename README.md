@@ -1,6 +1,8 @@
 # LESCO 
 The Single Page Application used for bulk analysis of ElasticSearch data
 
+<img src="logo.png" width="60">
+
 # Working Practice
 This will be our git working practice:
 
