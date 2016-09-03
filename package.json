@@ -42,7 +42,9 @@
     "react-router-redux" : "*",
     "react-router" : "*",
     "redux-thunk" :"*",
-    "redux-immutable-state-invariant" :"*"
+    "redux-immutable-state-invariant" :"*",
+    "react-querybuilder": "*",
+    "react-bootstrap": "*"
   },
   "config": {
     "host": "localhost",
