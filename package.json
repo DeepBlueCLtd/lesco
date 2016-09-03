@@ -44,8 +44,7 @@
     "redux-thunk" :"*",
     "redux-immutable-state-invariant" :"*",
     "react-querybuilder": "*",
-    "react-bootstrap": "*",
-    "react-leaflet": "*"
+    "react-bootstrap": "*"
   },
   "config": {
     "host": "localhost",
