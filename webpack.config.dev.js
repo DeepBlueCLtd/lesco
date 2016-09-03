@@ -12,7 +12,7 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'     
+        filename: 'bundle.js'
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -23,6 +23,12 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'index.html', // Load a custom template 
             inject: 'body' // Inject all scripts into the body 
+        }),
+        new webpack.ProvidePlugin({
+            ReactDOM: 'react-dom',
+            React: 'react',
+            'window.React': 'react', 
+            'window.ReactDOM' : 'react-dom'
         })
     ],
     module: {

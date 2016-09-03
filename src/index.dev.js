@@ -9,7 +9,8 @@ import {browserHistory} from 'react-router';
 
 
 import initialState from './reducers/initialState';
-import configureStore from './store/configureStore';
+import configureStore from './store/configureStore.prod';
+
 
 // store initialization
 const store = configureStore(initialState);
@@ -21,7 +22,7 @@ const rootEl = document.getElementById('root');
 render(
     <AppContainer>
         <Provider store={store}>
-            <App history={history} store={store}/>
+            <App/>
         </Provider>
     </AppContainer>,
     rootEl
@@ -35,7 +36,7 @@ if (module.hot) {
         render(
             <AppContainer>
                 <Provider store={store}>
-                    <NextApp history={history} store={store} />
+                    <NextApp/>
                 </Provider>
             </AppContainer>,
             rootEl

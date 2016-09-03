@@ -41,7 +41,8 @@
     "react-redux" : "*",
     "react-router-redux" : "*",
     "react-router" : "*",
-    "redux-thunk" :"*"
+    "redux-thunk" :"*",
+    "redux-immutable-state-invariant" :"*"
   },
   "config": {
     "host": "localhost",

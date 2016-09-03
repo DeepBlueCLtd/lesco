@@ -38,6 +38,12 @@ module.exports = {
             template: 'index.html', // Load a custom template 
             inject: 'body', // Inject all scripts into the body 
             hash: true
+        }),
+        new webpack.ProvidePlugin({
+            ReactDOM: 'react-dom',
+            React: 'react',
+            'window.React': 'react',
+            'window.ReactDOM': 'react-dom'
         })
     ],
     module: {

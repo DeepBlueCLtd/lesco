@@ -1,12 +1,12 @@
 import React from 'react'
-import { NICE, SUPER_NICE } from './colors'
-import Counter from './Counter'
+
+
+import MainLayout from './components/views/mainlayout';
 
 const App = () => (
     <div>
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
-    </div>  
-)
+        <MainLayout/>
+    </div>
+)   
 
 export default App
