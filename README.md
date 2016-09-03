@@ -16,3 +16,5 @@ This will be our git working practice:
 2. Run ````npm install```` - to install dependencies
 3. Run ````npm run build```` - to create the dist folder.
 
+## Super-efficient build runner
+````npm prune; npm install; npm run build; paplay long.ogg; google-chrome dist/index.html ````
