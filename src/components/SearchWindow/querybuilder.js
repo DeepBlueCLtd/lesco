@@ -29,7 +29,7 @@ function getEditor({field, operator, value, onChange}) {
             </span>
         );
     }
-    if (field == 'spatial' ) {
+    if (field == 'spatial') {
         const hasValue = !!value;
         return (
             <span>
@@ -46,13 +46,23 @@ function getOperators(field) {
     return [{ name: 'InRadius', label: 'Inside Radius' }, { name: 'OutRadius', label: 'Outside Radius' }];
 }
 
+const startQuery = {
+    combinator: 'and',
+    rules: [
+        {
+            field: 'firstName',
+            operator: 'null',
+            value: ''
+        }
+    ]
+}
 
 const dom = () => {
     return (
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
             <Well >
                 <strong>Create your search query</strong>
-                <QueryBuilder fields={fields}
+                <QueryBuilder query= {startQuery} fields={fields}
                     onQueryChange={logQuery} getEditor={getEditor} getOperators={getOperators}/>
             </Well>
 
@@ -66,8 +76,8 @@ const dom = () => {
         </div>)
 }
 
-export default dom;
 
+export default dom;
 
 function logQuery(query) {
     console.log(query);
