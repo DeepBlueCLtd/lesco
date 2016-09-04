@@ -125,11 +125,8 @@ export default class MainLayout extends Component {
                 stack.header.controlsContainer.children('.alertCommands').remove();
                 // interact with the contentItem
                 if (contentItem.config.component == 'Alert Wall') {
-
-                    stack.header.controlsContainer.prepend('<li class="alertCommands">*</li>');
+                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></li>');
                 }
-
-
             });
 
             /*
