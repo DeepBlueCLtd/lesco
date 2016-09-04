@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
-
+import TableWindow from '../TableWindow/tableView';
 
 const GoldenLayout = require('golden-layout');
 
@@ -89,7 +89,7 @@ export default class MainLayout extends Component {
         layout.registerComponent('Histogram', temp)
         layout.registerComponent('Cloud', temp)
         layout.registerComponent('Map', MapWindow)
-        layout.registerComponent('Table', temp)
+        layout.registerComponent('Table', TableWindow)
         layout.init()
     }
     render() {
