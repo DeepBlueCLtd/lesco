@@ -161,8 +161,8 @@ export default class QueryBuilderWindow extends Component {
                     </div>
                 </div>
                 <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
-                    <Button bsStyle='danger' onClick={this.open} ><Glyphicon glyph="alert" />  Create Alert </Button>
-                    <Button bsStyle='primary'><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
+                    <Button bsStyle='danger'  ><Glyphicon glyph="alert" />  Create Alert </Button>
+                    <Button bsStyle='primary' onClick={this.open} ><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
                     <div style={{ clear: 'both' }}></div>
                 </div>
 
