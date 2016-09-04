@@ -2,6 +2,7 @@ import {QueryBuilder} from 'react-querybuilder';
 import React, {Component} from 'react';
 import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
 import CreateDataViewDialog from '../Dialogs/createDataView';
+import CreateAlertViewDialog from '../Dialogs/createAlertView';
 const {Footer, Body, Header, Title} = Modal;
 /* eslint-disable react/prop-types*/
 
@@ -131,17 +132,22 @@ export default class QueryBuilderWindow extends Component {
         this.state = { showModalView: false, showModalAlert: false };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
+         this.openAlert = this.openAlert.bind(this);
     }
 
     close() {
         this.setState({ showModalView: false });
+        this.setState({ showModalAlert: false })
     }
 
     open() {
         this.setState({ showModalView: true });
     }
+    openAlert() {
+        this.setState({ showModalAlert: true });
+    }
     render() {
-        const showModalView = this.state.showModalView;
+        const {showModalView, showModalAlert} = this.state;
         return (
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                 <div className="container-fluid" >
@@ -161,7 +167,7 @@ export default class QueryBuilderWindow extends Component {
                     </div>
                 </div>
                 <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
-                    <Button bsStyle='danger'  ><Glyphicon glyph="alert" />  Create Alert </Button>
+                    <Button bsStyle='danger' onClick={this.openAlert}  ><Glyphicon glyph="alert" />  Create Alert </Button>
                     <Button bsStyle='primary' onClick={this.open} ><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
                     <div style={{ clear: 'both' }}></div>
                 </div>
@@ -179,7 +185,18 @@ export default class QueryBuilderWindow extends Component {
                         <Button onClick={this.close}>Close</Button>
                     </Footer>
                 </Modal>
-
+                <Modal show={showModalAlert} onHide={this.close}>
+                    <Header closeButton>
+                        <Title>Create Alert</Title>
+                    </Header>
+                    <Body>
+                        <CreateAlertViewDialog/>
+                    </Body>
+                    <Footer>
+                        <Button  bsStyle="success"onClick={this.close}>Confirm</Button>
+                        <Button onClick={this.close}>Close</Button>
+                    </Footer>
+                </Modal>
 
 
             </div >)

@@ -38,10 +38,10 @@ export default class createDataViewDialog extends Component {
     
                                                  <FormGroup>
                                                   <FieldGroup label="View Name"  type="text"/>
-                                                <Checkbox inline>
+                                                <Checkbox >
                                                     Inteligent Sample Rate
                                                 </Checkbox>
-                                                  <Checkbox inline>
+                                                  <Checkbox >
                                                     Receive Updates
                                                 </Checkbox>
                                                 </FormGroup>
