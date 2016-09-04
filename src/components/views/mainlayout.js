@@ -1,10 +1,38 @@
 import React, {Component} from 'react';
-
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
 import TableWindow from '../TableWindow/tableView';
+import {ButtonToolbar, Dropdown, Glyphicon,MenuItem} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 
+const DropdownMenu = Dropdown.Menu;
+
+
+/* eslint-disable react/no-multi-comp*/
+/* eslint-disable react/prop-types*/
 const GoldenLayout = require('golden-layout');
+
+
+class CustomToggle extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+
+        this.props.onClick(e);
+    }
+
+    render() {
+        return (
+            <Glyphicon glyph="cog" onClick={this.handleClick} />
+        );
+    }
+}
+
 
 //configuration for the layout
 const layoutConfig = {
@@ -80,6 +108,7 @@ const layoutConfig = {
             }]
     }]
 };
+// eslint-disable-next-line react/no-multi-comp
 
 export default class MainLayout extends Component {
 
@@ -100,6 +129,7 @@ export default class MainLayout extends Component {
                 const color = this.props.color || '#000000';
                 this.props.glContainer.tab.titleElement.prevObject.css('background-color', this.props.color);
                 this.props.glContainer.tab.setTitle(this.props.title || 'No Title');
+                // eslint-disable-next-line react/prop-types
                 this.props.glContainer.on('tab', (tab) => {
                     tab.titleElement.prevObject.css('background-color', color);
                 });
@@ -126,13 +156,37 @@ export default class MainLayout extends Component {
              */
             stack.on('activeContentItemChanged', function (contentItem) {
                 stack.header.controlsContainer.children('.alertCommands').remove();
+                const buttonInstance = (
+                    <ButtonToolbar>
+                        <Dropdown id="dropdown-custom-1"  >
+                            <CustomToggle bsRole="toggle">
+                                <Glyphicon glyph="cog" />
+                            </CustomToggle>
+                            <DropdownMenu className="">
+                                <MenuItem divider />
+                                <MenuItem eventKey="1">Low Priority (1) </MenuItem>
+                                <MenuItem eventKey="2" active >Medium Priority (2) </MenuItem>
+                                <MenuItem eventKey="3">High Priority (3) </MenuItem>
+                                <MenuItem eventKey="4">Highest Priority (4) </MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="6">Color (Red) </MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="7" >Export to PNG</MenuItem>
+                                <MenuItem eventKey="8" >Export to CSV</MenuItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </ButtonToolbar>
+
+                );
+
+
+
                 // interact with the contentItem
                 if (contentItem.config.component == 'Alert Wall') {
 
-                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
-
-                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></li>');
-
+                    stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
+                    stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
+                    ReactDOM.render(buttonInstance, stack.header.controlsContainer.children('.cogSettings')[0]);
                 }
             });
 

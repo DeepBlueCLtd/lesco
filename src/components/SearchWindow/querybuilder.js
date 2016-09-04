@@ -1,7 +1,7 @@
 import {QueryBuilder} from 'react-querybuilder';
 import React from 'react';
 import { Button, Glyphicon, Well } from 'react-bootstrap';
-
+ /* eslint-disable react/prop-types*/
 
 const fields = [
     { name: 'location', label: 'Location', value: {}},
@@ -25,9 +25,6 @@ const CSSClass = {
     value: 'form-control', // <input> for the field value
     removeRule: 'btn btn-danger' // <button> to remove a Rule
 };
-
-
-
 
 function getEditor({field, operator, value, onChange}) {
     if (field == 'hasMedia') {
@@ -152,5 +149,5 @@ const dom = () => {
 export default dom;
 
 function logQuery(query) {
-    console.log(query);
+    //console.log(query);
 }
