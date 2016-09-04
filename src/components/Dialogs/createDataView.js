@@ -49,24 +49,7 @@ export default class createDataViewDialog extends Component {
                                 </Well>
                             </div>
                         </Col>
-                        <Col xs={6} md={6}>
-                            <div>
-                                <Well bsSize="large">
-                                    <h5>Configure View</h5>
-
-                                    <FormGroup>
-                                        <FieldGroup label="View Name"  type="text"/>
-                                        <Checkbox inline>
-                                            Inteligent Sample Rate
-                                        </Checkbox>
-                                        <Checkbox inline>
-                                            Receive Updates
-                                        </Checkbox>
-                                    </FormGroup>
-                                </Well>
-
-                            </div>
-                        </Col>
+                      
                     </Row>
                 </Grid>
             </Tab>
