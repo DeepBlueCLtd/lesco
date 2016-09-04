@@ -12,7 +12,8 @@ const fields = [
     { name: 'email', label: 'Email' },
     { name: 'twitter', label: 'Twitter' },
     { name: 'isDev', label: 'Is a Developer?', value: false },
-    { name: 'spatial', label: 'Spatial Custom Type', value: {} }
+    { name: 'spatial', label: 'Spatial Custom Type', value: {} },
+    { name: 'Location', label: 'Location', value: {} }
 ];
 
 const CSSClass = {
@@ -52,6 +53,24 @@ function getEditor({field, operator, value, onChange}) {
             </span>
         );
     }
+    if (field == 'Location') {
+        return (
+
+            <select className='form-control'>
+                <option value="volvo">N/A</option>
+                <option value="volvo">Global</option>
+                <option value="volvo">Current Viewport (Map1) </option>
+                <optgroup label="System">
+                    <option value="volvo">London Airports</option>
+                    <option value="saab">London Boroughs</option>
+                </optgroup>
+                <optgroup label="Locals">
+                    <option value="mercedes">M25</option>
+                    <option value="audi">Internet Cafes</option>
+                </optgroup>
+            </select>
+        )
+    }
     return (<span>
         <input type="text" className="form-control" style={{ width: '30%', minWidth: '120px', display: 'inline-block' }}
             value={value}
@@ -84,9 +103,9 @@ const dom = () => {
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
             <div className="container-fluid" >
                 <div className="row" >
-                    <div className="col-md-2" style={{minWidth:'110px'}}>
-                        <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center' }}>
-                            <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height:'100px', marginTop:'30px', marginLeft:'10px'}}/>
+                    <div className="col-md-2" style={{ minWidth: '110px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/>
                         </div>
                     </div>
                     <div className="col-xs-10" >
