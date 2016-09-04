@@ -25,9 +25,29 @@ const layoutConfig = {
                 component: 'Search Criteria',
                 title: 'Search Criteria'
             }, {
-                    type: 'react-component',
-                    component: 'Alert Wall',
-                    title: 'Alert Wall'
+                    type: 'stack',
+                    content: [{
+                        type: 'react-component',
+                        component: 'Alert Wall',
+                        title: 'Alert1'
+                    }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert2',
+                            props: { title: 'Alert 1', color: '#0000FF' }
+                        }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert3',
+                            props: { title: 'Alert 1', color: '#00FFFF' }
+                        }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert6',
+                            props: { title: 'Alert 1', color: '#FFFFFF' }
+
+                        }
+                    ]
                 }
             ]
         }, {
@@ -68,30 +88,63 @@ export default class MainLayout extends Component {
             render: () => {
                 return (<h1>test component 3</h1>)
             }
-        })
+        });
         const queryWidget = React.createClass({
             render: () => {
                 return (<QueryWindow/>)
             }
+        });
+        const alertWall = React.createClass({
+            componentDidMount: function () {
+
+                const color = this.props.color || '#000000';
+                this.props.glContainer.tab.titleElement.prevObject.css('background-color', this.props.color);
+                this.props.glContainer.tab.setTitle(this.props.title || 'No Title');
+                this.props.glContainer.on('tab', (tab) => {
+                    tab.titleElement.prevObject.css('background-color', color);
+                });
+            },
+            render: function () {
+
+                return (<h1>test component 3</h1>)
+            }
+
         })
 
-        const mapWidget = React.createClass({
-            render: () => {
-                return (<MapWindow/>);
-            }
+        const layout = new GoldenLayout(layoutConfig);
+        layout.registerComponent('Search Criteria', queryWidget);
+        layout.registerComponent('Alert Wall', alertWall);
+        layout.registerComponent('Histogram', temp);
+        layout.registerComponent('Cloud', temp);
+        layout.registerComponent('Map', MapWindow);
+        layout.registerComponent('Table', TableWindow);
+
+        layout.on('stackCreated', function (stack) {
+            /*
+             * Listening for activeContentItemChanged. This happens initially
+             * when the stack is created and everytime the user clicks a tab
+             */
+            stack.on('activeContentItemChanged', function (contentItem) {
+                stack.header.controlsContainer.children('.alertCommands').remove();
+                // interact with the contentItem
+                if (contentItem.config.component == 'Alert Wall') {
+
+                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
+
+                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></li>');
+
+                }
+            });
+
+            /*
+             * Accessing the container and updating its state
+             */
+            //stack.getActiveContentItem().container.extendState({ color: '#faa' });
         });
 
-    
-
-        const layout = new GoldenLayout(layoutConfig)
-        layout.registerComponent('Search Criteria', queryWidget)
-        layout.registerComponent('Alert Wall', temp)
-        layout.registerComponent('Histogram', temp)
-        layout.registerComponent('Cloud', temp)
-        layout.registerComponent('Map', MapWindow)
-        layout.registerComponent('Table', TableWindow)
         layout.init()
     }
+
     render() {
         return (<div></div>)
     }
