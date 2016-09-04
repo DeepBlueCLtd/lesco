@@ -81,13 +81,13 @@ const layoutConfig = {
                             {
                                 type: 'react-component',
                                 component: 'MapAlert',
-                                title: 'Alert1',
-                                props: { title: 'Alert 1', color: '#53eb53' }
+                                title: 'New #dinner',
+                                props: { title: 'New #dinner', color: '#53eb53' }
                             }, {
                                 type: 'react-component',
                                 component: 'TableAlert',
-                                title: 'Alert2',
-                                props: { title: 'Alert 2', color: '#eb4f4f' }
+                                title: 'New #evening',
+                                props: { title: 'New #evening', color: '#eb4f4f' }
                             }
                         ]
                     }, {
@@ -97,13 +97,13 @@ const layoutConfig = {
                                 {
                                     type: 'react-component',
                                     component: 'HistogramAlert',
-                                    title: 'Alert3',
-                                    props: { title: 'Alert 3', color: '#eb9650' }
+                                    title: 'Platforms today',
+                                    props: { title: 'Platforms today', color: '#eb9650' }
                                 }, {
                                     type: 'react-component',
                                     component: 'CloudAlert',
-                                    title: 'Alert4',
-                                    props: { title: 'Alert 4', color: '#4febeb' }
+                                    title: 'Trending this hour',
+                                    props: { title: 'Trending this hour', color: '#4febeb' }
 
                                 }
                             ]
@@ -118,8 +118,8 @@ const layoutConfig = {
                                 {
                                     type: 'react-component',
                                     component: 'CardAlert',
-                                    title: 'Alert4',
-                                    props: { title: 'Alert 4', color: '#4febeb' }
+                                    title: 'Local imagery',
+                                    props: { title: 'Local imagery', color: '#4febeb' }
 
                                 }
                             ]
