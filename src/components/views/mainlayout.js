@@ -25,64 +25,64 @@ const layoutConfig = {
                 component: 'Search Criteria',
                 title: 'Search Criteria'
             }, {
-                    type: 'stack',
-                    content: [{
-                        type: 'react-component',
-                        component: 'Alert Wall',
-                        title: 'Alert1'
-                    }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert1'
-                        }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert1'
-                        }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert1'
-                        }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert1'
-                        }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert1'
+                type: 'stack',
+                content: [{
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert1'
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert2'
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert3'
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert4'
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert5'
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert6'
 
-                        }
-                    ]
                 }
+                ]
+            }
             ]
         }, {
-                type: 'row',
+            type: 'row',
+            content: [{
+                type: 'column',
+                width: 50,
                 content: [{
-                    type: 'column',
-                    width: 50,
+                    type: 'stack',
+                    height: 50,
                     content: [{
-                        type: 'stack',
-                        height: 50,
-                        content: [{
-                            type: 'react-component',
-                            component: 'Table',
-                            title: 'Table'
-                        }, {
-                                type: 'react-component',
-                                component: 'Map',
-                                title: 'Map'
-                            }, {
-                                type: 'react-component',
-                                component: 'Cloud',
-                                title: 'Cloud'
-                            }, {
-                                type: 'react-component',
-                                component: 'Histogram',
-                                title: 'Histogram'
-                            }]
+                        type: 'react-component',
+                        component: 'Table',
+                        title: 'Table'
+                    }, {
+                        type: 'react-component',
+                        component: 'Map',
+                        title: 'Map'
+                    }, {
+                        type: 'react-component',
+                        component: 'Cloud',
+                        title: 'Cloud'
+                    }, {
+                        type: 'react-component',
+                        component: 'Histogram',
+                        title: 'Histogram'
                     }]
                 }]
             }]
+        }]
     }]
 };
 
@@ -93,12 +93,12 @@ export default class MainLayout extends Component {
             render: () => {
                 return (<h1>test component 3</h1>)
             }
-        })
+        });
         const queryWidget = React.createClass({
             render: () => {
                 return (<QueryWindow/>)
             }
-        })
+        });
 
         const mapWidget = React.createClass({
             render: () => {
@@ -107,14 +107,13 @@ export default class MainLayout extends Component {
         });
 
 
-
-        const layout = new GoldenLayout(layoutConfig)
-        layout.registerComponent('Search Criteria', queryWidget)
-        layout.registerComponent('Alert Wall', temp)
-        layout.registerComponent('Histogram', temp)
-        layout.registerComponent('Cloud', temp)
-        layout.registerComponent('Map', MapWindow)
-        layout.registerComponent('Table', TableWindow)
+        const layout = new GoldenLayout(layoutConfig);
+        layout.registerComponent('Search Criteria', queryWidget);
+        layout.registerComponent('Alert Wall', temp);
+        layout.registerComponent('Histogram', temp);
+        layout.registerComponent('Cloud', temp);
+        layout.registerComponent('Map', MapWindow);
+        layout.registerComponent('Table', TableWindow);
 
         layout.on('stackCreated', function (stack) {
             /*
@@ -141,6 +140,7 @@ export default class MainLayout extends Component {
 
         layout.init()
     }
+
     render() {
         return (<div></div>)
     }
