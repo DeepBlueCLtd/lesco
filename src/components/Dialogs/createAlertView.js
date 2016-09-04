@@ -22,10 +22,10 @@ export default class createAlerView extends Component {
                     <Col xs={6} md={6}>
                         <div>
                             <Well bsSize="large">
-                                <Button onClick={this.close}>Map</Button>
-                                <Button onClick={this.close}>Table</Button>
-                                <Button onClick={this.close}>Cards</Button>
-                                <Button onClick={this.close}>Histogram</Button>
+                                <Button onClick={this.close}><img src="http://placehold.it/50x50"></img></Button>
+                                <Button onClick={this.close}><img src="http://placehold.it/50x50"></img></Button>
+                                <Button onClick={this.close}><img src="http://placehold.it/50x50"></img></Button>
+                                <Button onClick={this.close}><img src="http://placehold.it/50x50"></img></Button>
                             </Well>
 
                         </div>
