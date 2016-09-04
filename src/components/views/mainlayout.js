@@ -160,11 +160,17 @@ export default class MainLayout extends Component {
                         <Glyphicon glyph="cog" />
                     </CustomToggle>
                     <Dropdown.Menu className="">
-                        <MenuItem eventKey="1">Priority (1)</MenuItem>
-                        <MenuItem eventKey="2">Color (Red)</MenuItem>
+                      <MenuItem divider />
+                        <MenuItem eventKey="1">Low Priority (1)</MenuItem>
+                         <MenuItem eventKey="2" active >Medium Priority (2)</MenuItem>
+                          <MenuItem eventKey="3">High Priority (3)</MenuItem>
+                           <MenuItem eventKey="4">Highest Priority (4)</MenuItem>
+                          <MenuItem divider />
+                        <MenuItem eventKey="6">Color (Red)</MenuItem>
+                        
                         <MenuItem divider />
-                        <MenuItem eventKey="3" >Export to PNG</MenuItem>
-                        <MenuItem eventKey="4" >Export to CSV</MenuItem>
+                        <MenuItem eventKey="7" >Export to PNG</MenuItem>
+                        <MenuItem eventKey="8" >Export to CSV</MenuItem>
                     </Dropdown.Menu>
                     </Dropdown>
                 </ButtonToolbar>
