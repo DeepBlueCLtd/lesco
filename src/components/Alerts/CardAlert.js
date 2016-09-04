@@ -12,8 +12,8 @@ export default class CardAlert extends Component {
             <div style={{ overflow: 'scroll', position: 'relative', width: '100%', height: '100%' }}>
                 <div>
                     {imgSource.map((x) => {
-                        return <div style={{width: '48%', height: '48%' ,display:'inline'}}>
-                            <img  key={x} src={x} style= {{ margin: '1%', width: '48%', height: '48%', maxHeight: '100px', objectFit: 'cover' }}/>
+                        return <div key={x} style={{width: '48%', height: '48%' ,display:'inline'}}>
+                            <img   src={x} style= {{ margin: '1%', width: '48%', height: '48%', maxHeight: '100px', objectFit: 'cover' }}/>
                         </div>
                     }) }
                 </div>

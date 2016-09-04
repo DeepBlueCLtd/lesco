@@ -12,7 +12,7 @@ import CloudAlert from '../Alerts/CloudAlert';
 import CardAlert from '../Alerts/CardAlert';
 
 function isAlert(t) {
-    return t == 'MapAlert' || t == 'TableAlert' || t == 'HistogramAlert' || t == 'CloudAlert' ||  (t.indexOf('Alert') !== -1);
+    return t == 'MapAlert' || t == 'TableAlert' || t == 'HistogramAlert' || t == 'CloudAlert' || (t.indexOf('Alert') !== -1);
 }
 const DropdownMenu = Dropdown.Menu;
 
