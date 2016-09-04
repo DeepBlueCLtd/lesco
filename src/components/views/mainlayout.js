@@ -2,9 +2,18 @@ import React, {Component} from 'react';
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
 import TableWindow from '../TableWindow/tableView';
-import {ButtonToolbar, Dropdown, Glyphicon,MenuItem} from 'react-bootstrap';
+import {ButtonToolbar, Dropdown, Glyphicon, MenuItem} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 
+import MapAlert from '../Alerts/MapAlert';
+import TableAlert from '../Alerts/TableAlert';
+import HistogramAlert from '../Alerts/HistogramAlert';
+import CloudAlert from '../Alerts/CloudAlert';
+import CardAlert from '../Alerts/CardAlert';
+
+function isAlert(t) {
+    return t == 'MapAlert' || t == 'TableAlert' || t == 'HistogramAlert' || t == 'CloudAlert' || t.contains('Alert');
+}
 const DropdownMenu = Dropdown.Menu;
 
 
@@ -34,6 +43,10 @@ class CustomToggle extends React.Component {
 }
 
 
+
+
+
+
 //configuration for the layout
 const layoutConfig = {
     settings: {
@@ -47,66 +60,103 @@ const layoutConfig = {
         type: 'row',
         content: [{
             type: 'column',
-            width: 40,
-            content: [{
-                type: 'react-component',
-                component: 'Search Criteria',
-                title: 'Search Criteria'
-            }, {
-                type: 'stack',
-                content: [{
-                    type: 'react-component',
-                    component: 'Alert Wall',
-                    title: 'Alert1',
-                    props: {title: 'Alert 1', color: '#53eb53'}
-                }, {
-                    type: 'react-component',
-                    component: 'Alert Wall',
-                    title: 'Alert2',
-                    props: {title: 'Alert 2', color: '#eb4f4f'}
-                }, {
-                    type: 'react-component',
-                    component: 'Alert Wall',
-                    title: 'Alert3',
-                    props: {title: 'Alert 3', color: '#eb9650'}
-                }, {
-                    type: 'react-component',
-                    component: 'Alert Wall',
-                    title: 'Alert4',
-                    props: {title: 'Alert 4', color: '#4febeb'}
-
-                }
-                ]
-            }
-            ]
-        }, {
-            type: 'row',
-            content: [{
-                type: 'column',
-                width: 50,
-                content: [{
-                    type: 'stack',
+            width: 50,
+            content: [
+                {
+                    type: 'row',
                     height: 50,
                     content: [{
                         type: 'react-component',
-                        component: 'Table',
-                        title: 'Table'
+                        component: 'Search Criteria',
+                        title: 'Search Criteria'
+                    }]
+                },
+                {
+                    type: 'row',
+                    height: 50,
+                    content: [{
+                        type: 'column',
+                        width: 33,
+                        content: [
+                            {
+                                type: 'react-component',
+                                component: 'MapAlert',
+                                title: 'New #dinner',
+                                props: { title: 'New #dinner', color: '#53eb53' }
+                            }, {
+                                type: 'react-component',
+                                component: 'TableAlert',
+                                title: 'New #evening',
+                                props: { title: 'New #evening', color: '#eb4f4f' }
+                            }
+                        ]
                     }, {
-                        type: 'react-component',
-                        component: 'Map',
-                        title: 'Map'
-                    }, {
-                        type: 'react-component',
-                        component: 'Cloud',
-                        title: 'Cloud'
-                    }, {
-                        type: 'react-component',
-                        component: 'Histogram',
-                        title: 'Histogram'
+                            type: 'column',
+                            width: 33,
+                            content: [
+                                {
+                                    type: 'react-component',
+                                    component: 'HistogramAlert',
+                                    title: 'Platforms today',
+                                    props: { title: 'Platforms today', color: '#eb9650' }
+                                }, {
+                                    type: 'react-component',
+                                    component: 'CloudAlert',
+                                    title: 'Trending this hour',
+                                    props: { title: 'Trending this hour', color: '#4febeb' }
+
+                                }
+                            ]
+
+
+                        },
+                        {
+                            type: 'column',
+                            width: 33,
+                            content: [
+
+                                {
+                                    type: 'react-component',
+                                    component: 'CardAlert',
+                                    title: 'Local imagery',
+                                    props: { title: 'Local imagery', color: '#4febeb' }
+
+                                }
+                            ]
+                        }
+
+
+                    ]
+                }
+            ]
+        }, {
+                type: 'row',
+                content: [{
+                    type: 'column',
+                    width: 50,
+                    content: [{
+                        type: 'stack',
+                        height: 50,
+                        content: [{
+                            type: 'react-component',
+                            component: 'Table',
+                            title: 'Table'
+                        }, {
+                                type: 'react-component',
+                                component: 'Map',
+                                title: 'Map'
+                            }, {
+                                type: 'react-component',
+                                component: 'Cloud',
+                                title: 'Cloud'
+                            }, {
+                                type: 'react-component',
+                                component: 'Histogram',
+                                title: 'Histogram'
+                            }]
                     }]
                 }]
             }]
-        }]
     }]
 };
 // eslint-disable-next-line react/no-multi-comp
@@ -139,16 +189,21 @@ export default class MainLayout extends Component {
                 });
             },
             render: function () {
-
                 return (<h1>Alert Window {alertCtr++}</h1>)
             }
-
         })
 
         const layout = new GoldenLayout(layoutConfig);
         layout.registerComponent('Search Criteria', queryWidget);
+
+        layout.registerComponent('MapAlert', MapAlert);
+        layout.registerComponent('TableAlert', TableAlert);
+        layout.registerComponent('HistogramAlert', HistogramAlert);
+        layout.registerComponent('CloudAlert', CloudAlert);
         layout.registerComponent('Alert Wall', alertWall);
         layout.registerComponent('Histogram', temp);
+        layout.registerComponent('CardAlert', CardAlert);
+
         layout.registerComponent('Cloud', temp);
         layout.registerComponent('Map', MapWindow);
         layout.registerComponent('Table', TableWindow);
@@ -172,8 +227,8 @@ export default class MainLayout extends Component {
                                 <MenuItem divider />
                                 <MenuItem eventKey="1">Color ></MenuItem>
                                 <MenuItem eventKey="1">Audio ></MenuItem>
-                                <MenuItem eventKey="1">[x] Active</MenuItem>
-                                <MenuItem eventKey="1">[x] Intelligent downsample</MenuItem>
+                                <MenuItem eventKey="1">[x]Active</MenuItem>
+                                <MenuItem eventKey="1">[x]Intelligent downsample</MenuItem>
                                 <MenuItem divider />
                                 <MenuItem eventKey="1">Export to CSV</MenuItem>
                                 <MenuItem eventKey="1">Export to PNG</MenuItem>
@@ -187,13 +242,37 @@ export default class MainLayout extends Component {
                 );
 
 
+                const searchWindow = (
+                    <ButtonToolbar>
+                        <Dropdown id="dropdown-custom-1"  >
+                            <CustomToggle bsRole="toggle">
+                                <Glyphicon glyph="cog" />
+                            </CustomToggle>
+                            <DropdownMenu className="">
+                                <MenuItem eventKey="1">Save Session</MenuItem>
+                                <MenuItem eventKey="1">Restore Session </MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="1">Disable Updates</MenuItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </ButtonToolbar>
+
+                );
+
+
 
                 // interact with the contentItem
-                if (contentItem.config.component == 'Alert Wall') {
+                if (isAlert(contentItem.config.component)) {
 
                     stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
                     stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
                     ReactDOM.render(buttonInstance, stack.header.controlsContainer.children('.cogSettings')[0]);
+                }
+                if (contentItem.config.component == 'Search Criteria') {
+
+                    stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
+                    stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
+                    ReactDOM.render(searchWindow, stack.header.controlsContainer.children('.cogSettings')[0]);
                 }
             });
 
