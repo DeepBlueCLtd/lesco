@@ -49,7 +49,6 @@ export default class createDataViewDialog extends Component {
                                 </Well>
                             </div>
                         </Col>
-                      
                     </Row>
                 </Grid>
             </Tab>
