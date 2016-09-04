@@ -1,7 +1,7 @@
 import {QueryBuilder} from 'react-querybuilder';
 import React from 'react';
 import { Button, Glyphicon, Well } from 'react-bootstrap';
-
+ /* eslint-disable react/prop-types*/
 
 const fields = [
     { name: 'firstName', label: 'First Name' },
@@ -46,7 +46,6 @@ function getEditor({field, operator, value, onChange}) {
         );
     }
     if (field == 'spatial') {
-        const hasValue = !!value;
         return (
             <span>
                 I am a custom Value
@@ -131,5 +130,5 @@ const dom = () => {
 export default dom;
 
 function logQuery(query) {
-    console.log(query);
+    //console.log(query);
 }

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
 import TableWindow from '../TableWindow/tableView';
 import {ButtonToolbar,Dropdown,MenuItem,Glyphicon} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 
+ /* eslint-disable react/no-multi-comp*/
+ /* eslint-disable react/prop-types*/
 const GoldenLayout = require('golden-layout');
-
+   
 
 class CustomToggle extends React.Component {
   constructor(props, context) {
@@ -104,6 +105,7 @@ const layoutConfig = {
             }]
     }]
 };
+   // eslint-disable-next-line react/no-multi-comp
 
 export default class MainLayout extends Component {
 
@@ -119,16 +121,17 @@ export default class MainLayout extends Component {
             }
         });
         const alertWall = React.createClass({
-            componentDidMount: function () {
+            componentDidMount:  function()  {
 
                 const color = this.props.color || '#000000';
                 this.props.glContainer.tab.titleElement.prevObject.css('background-color', this.props.color);
                 this.props.glContainer.tab.setTitle(this.props.title || 'No Title');
+                // eslint-disable-next-line react/prop-types
                 this.props.glContainer.on('tab', (tab) => {
                     tab.titleElement.prevObject.css('background-color', color);
                 });
             },
-            render: function () {
+            render: function() {
 
                 return (<h1>test component 3</h1>)
             }
