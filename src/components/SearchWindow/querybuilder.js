@@ -50,11 +50,11 @@ function getEditor({field, operator, value, onChange}) {
     if (field == 'time' && operator == 'last') {
         return (
             <select className='form-control'>
-                <option value="last-15m">Last 15 mins</option>
-                <option value="last-h">Last hour</option>
-                <option value="last-12h">Last 12 hours</option>
-                <option value="last-day">Last day</option>
-                <option value="last-week">Last week</option>
+                <option value="last-15m">15 mins</option>
+                <option value="last-h">1 hour</option>
+                <option value="last-12h">12 hours</option>
+                <option value="last-day">Day</option>
+                <option value="last-week">Week</option>
             </select>
         )
     }
