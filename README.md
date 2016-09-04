@@ -12,9 +12,15 @@ This will be our git working practice:
 
 # Installing and Building Practice
 
+<<<<<<< HEAD
+1. Instal Node JS
+2. Run npm install - to install dependencies
+3. Run npm run build - to create the dist folder.
+=======
 1. Install Node JS (*or nodejs-legacy on Ubuntu*)
 2. Run ````npm install```` - to install dependencies
 3. Run ````npm run build```` - to create the dist folder.
+>>>>>>> refs/remotes/DeepBlueCLtd/master
 
 ## Super-efficient build runner
 ````npm prune; npm install; npm run build; paplay long.ogg; google-chrome dist/index.html ````
