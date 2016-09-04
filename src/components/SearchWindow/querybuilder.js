@@ -1,10 +1,12 @@
 import {QueryBuilder} from 'react-querybuilder';
-import React from 'react';
-import { Button, Glyphicon, Well } from 'react-bootstrap';
- /* eslint-disable react/prop-types*/
+import React, {Component} from 'react';
+import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
+import CreateDataViewDialog from '../Dialogs/createDataView';
+const {Footer, Body, Header, Title} = Modal;
+/* eslint-disable react/prop-types*/
 
 const fields = [
-    { name: 'location', label: 'Location', value: {}},
+    { name: 'location', label: 'Location', value: {} },
     { name: 'time', label: 'Time' },
     { name: 'keyword', label: 'Keyword' },
     { name: 'user', label: 'User' },
@@ -93,14 +95,14 @@ function getEditor({field, operator, value, onChange}) {
 
 function getOperators(field) {
     if (field == 'location') {
-        return[{ name: 'within', label: 'within' } , { name: 'na', label: 'n/a' }];
+        return [{ name: 'within', label: 'within' }, { name: 'na', label: 'n/a' }];
     } else if (field == 'hasMedia') {
-        return[{ name: 'true', label: 'Yes' }, { name: 'false', label: 'no' }];
+        return [{ name: 'true', label: 'Yes' }, { name: 'false', label: 'no' }];
     } else if (field == 'keyword') {
-        return[{ name: 'true', label: 'Contains' }, { name: 'false', label: 'Doesn\'t contain' },
+        return [{ name: 'true', label: 'Contains' }, { name: 'false', label: 'Doesn\'t contain' },
             { name: 'equals', label: 'Equals' }];
     } else if (field == 'time') {
-        return[{ name: 'before', label: 'Before' }, { name: 'after', label: 'After' },
+        return [{ name: 'before', label: 'Before' }, { name: 'after', label: 'After' },
             { name: 'between', label: 'Between' }, { name: 'last', label: 'Last' }];
     } else return null;
 
@@ -119,34 +121,72 @@ const startQuery = {
     ]
 };
 
-const dom = () => {
-    return (
-        <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <div className="container-fluid" >
-                <div className="row" >
-                    <div className="col-md-2" style={{ minWidth: '110px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/>
+
+
+
+export default class QueryBuilderWindow extends Component {
+
+    constructor(prop) {
+        super(prop);
+        this.state = { showModalView: false, showModalAlert: false };
+        this.close = this.close.bind(this);
+        this.open = this.open.bind(this);
+    }
+
+    close() {
+        this.setState({ showModalView: false });
+    }
+
+    open() {
+        this.setState({ showModalView: true });
+    }
+    render() {
+        const showModalView = this.state.showModalView;
+        return (
+            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <div className="container-fluid" >
+                    <div className="row" >
+                        <div className="col-md-2" style={{ minWidth: '110px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/>
+                            </div>
+                        </div>
+                        <div className="col-xs-10" >
+                            <Well  >
+                                <strong>Create your search query</strong>
+                                <QueryBuilder query={startQuery} fields={fields}
+                                    onQueryChange={logQuery} getEditor={getEditor} getOperators={getOperators} controlClassnames= {CSSClass}/>
+                            </Well>
                         </div>
                     </div>
-                    <div className="col-xs-10" >
-                        <Well  >
-                            <strong>Create your search query</strong>
-                            <QueryBuilder query={startQuery} fields={fields}
-                                onQueryChange={logQuery} getEditor={getEditor} getOperators={getOperators} controlClassnames= {CSSClass}/>
-                        </Well>
-                    </div>
                 </div>
-            </div>
-            <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
-                <Button bsStyle='danger'><Glyphicon glyph="alert" />  Create Alert </Button>
-                <Button bsStyle='primary'><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
-                <div style={{ clear: 'both' }}></div>
-            </div>
-        </div >)
-};
+                <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
+                    <Button bsStyle='danger' onClick={this.open} ><Glyphicon glyph="alert" />  Create Alert </Button>
+                    <Button bsStyle='primary'><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
+                    <div style={{ clear: 'both' }}></div>
+                </div>
 
-export default dom;
+
+                <Modal show={showModalView} onHide={this.close}>
+                    <Header closeButton>
+                        <Title>Create Data View</Title>
+                    </Header>
+                    <Body>
+                        <CreateDataViewDialog/>
+                    </Body>
+                    <Footer>
+                        <Button  bsStyle="success"onClick={this.close}>Confirm</Button>
+                        <Button onClick={this.close}>Close</Button>
+                    </Footer>
+                </Modal>
+
+
+
+            </div >)
+    }
+}
+
+
 
 function logQuery(query) {
     //console.log(query);
