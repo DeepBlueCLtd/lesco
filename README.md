@@ -1,6 +1,8 @@
 # LESCO 
 The Single Page Application used for bulk analysis of ElasticSearch data
 
+<img src="logo.png" width="60">
+
 # Working Practice
 This will be our git working practice:
 
@@ -20,3 +22,5 @@ This will be our git working practice:
 3. Run ````npm run build```` - to create the dist folder.
 >>>>>>> refs/remotes/DeepBlueCLtd/master
 
+## Super-efficient build runner
+````npm prune; npm install; npm run build; paplay long.ogg; google-chrome dist/index.html ````
