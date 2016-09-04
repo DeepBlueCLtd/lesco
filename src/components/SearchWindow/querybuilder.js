@@ -26,9 +26,6 @@ const CSSClass = {
     removeRule: 'btn btn-danger' // <button> to remove a Rule
 };
 
-
-
-
 function getEditor({field, operator, value, onChange}) {
     if (field == 'hasMedia') {
         // return empty control - we don't need another
@@ -37,7 +34,6 @@ function getEditor({field, operator, value, onChange}) {
             </span>
         );
     }
-
     if (field == 'source') {
         return (
             <select className='form-control'>
