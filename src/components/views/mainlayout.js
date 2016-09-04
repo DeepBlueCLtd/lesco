@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
+
+import QueryWindow from '../SearchWindow/querybuilder';
+import MapWindow from '../MapWindow/mapView';
+
+
 const GoldenLayout = require('golden-layout');
-
-
-const tempComponent = () => {
-    return <div/>
-}
 
 //configuration for the layout
 const layoutConfig = {
@@ -69,12 +69,26 @@ export default class MainLayout extends Component {
                 return (<h1>test component 3</h1>)
             }
         })
+        const queryWidget = React.createClass({
+            render: () => {
+                return (<QueryWindow/>)
+            }
+        })
+
+        const mapWidget = React.createClass({
+            render: () => {
+                return (<MapWindow/>);
+            }
+        });
+
+    
+
         const layout = new GoldenLayout(layoutConfig)
-        layout.registerComponent('Search Criteria', temp)
+        layout.registerComponent('Search Criteria', queryWidget)
         layout.registerComponent('Alert Wall', temp)
         layout.registerComponent('Histogram', temp)
         layout.registerComponent('Cloud', temp)
-        layout.registerComponent('Map', temp)
+        layout.registerComponent('Map', MapWindow)
         layout.registerComponent('Table', temp)
         layout.init()
     }
