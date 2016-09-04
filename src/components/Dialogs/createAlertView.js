@@ -23,12 +23,11 @@ export default class createAlerView extends Component {
                         <div>
                             <Well bsSize="large">
 
-                                <Button onClick={this.close}>Map</Button>
-                                <Button onClick={this.close}>Table</Button>
-                                <Button onClick={this.close}>Cards</Button>
-                                <Button onClick={this.close}>Histogram</Button>
-                                <Button onClick={this.close}>Tag cloud</Button>
-
+                      <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='map-marker' style={{fontSize:'250%'}} /></Button>
+                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='list-alt' style={{fontSize:'250%'}} /></Button>
+                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='signal' style={{fontSize:'250%'}} /></Button>
+                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='th-large' style={{ fontSize: '250%' }}/></Button>
+                                 <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='cloud' style={{fontSize:'250%'}}/></Button>
                             </Well>
 
                         </div>
