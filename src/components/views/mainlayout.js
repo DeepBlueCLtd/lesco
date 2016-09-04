@@ -25,9 +25,34 @@ const layoutConfig = {
                 component: 'Search Criteria',
                 title: 'Search Criteria'
             }, {
-                    type: 'react-component',
-                    component: 'Alert Wall',
-                    title: 'Alert Wall'
+                    type: 'stack',
+                    content: [{
+                        type: 'react-component',
+                        component: 'Alert Wall',
+                        title: 'Alert1'
+                    }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert1'
+                        }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert1'
+                        }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert1'
+                        }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert1'
+                        }, {
+                            type: 'react-component',
+                            component: 'Alert Wall',
+                            title: 'Alert1'
+
+                        }
+                    ]
                 }
             ]
         }, {
@@ -81,7 +106,7 @@ export default class MainLayout extends Component {
             }
         });
 
-    
+
 
         const layout = new GoldenLayout(layoutConfig)
         layout.registerComponent('Search Criteria', queryWidget)
@@ -90,6 +115,30 @@ export default class MainLayout extends Component {
         layout.registerComponent('Cloud', temp)
         layout.registerComponent('Map', MapWindow)
         layout.registerComponent('Table', TableWindow)
+
+        layout.on('stackCreated', function (stack) {
+            /*
+             * Listening for activeContentItemChanged. This happens initially
+             * when the stack is created and everytime the user clicks a tab
+             */
+            stack.on('activeContentItemChanged', function (contentItem) {
+                stack.header.controlsContainer.children('.alertCommands').remove();
+                // interact with the contentItem
+                if (contentItem.config.component == 'Alert Wall') {
+
+                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
+
+                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></li>');
+
+                }
+            });
+
+            /*
+             * Accessing the container and updating its state
+             */
+            //stack.getActiveContentItem().container.extendState({ color: '#faa' });
+        });
+
         layout.init()
     }
     render() {
