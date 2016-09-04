@@ -242,6 +242,24 @@ export default class MainLayout extends Component {
                 );
 
 
+                const searchWindow = (
+                    <ButtonToolbar>
+                        <Dropdown id="dropdown-custom-1"  >
+                            <CustomToggle bsRole="toggle">
+                                <Glyphicon glyph="cog" />
+                            </CustomToggle>
+                            <DropdownMenu className="">
+                                <MenuItem eventKey="1">Save Session</MenuItem>
+                                <MenuItem eventKey="1">Restore Session </MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="1">Disable Updates</MenuItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </ButtonToolbar>
+
+                );
+
+
 
                 // interact with the contentItem
                 if (isAlert(contentItem.config.component)) {
@@ -249,6 +267,12 @@ export default class MainLayout extends Component {
                     stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
                     stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
                     ReactDOM.render(buttonInstance, stack.header.controlsContainer.children('.cogSettings')[0]);
+                }
+                if (contentItem.config.component == 'Search Criteria') {
+
+                    stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
+                    stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
+                    ReactDOM.render(searchWindow, stack.header.controlsContainer.children('.cogSettings')[0]);
                 }
             });
 
