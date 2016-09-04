@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
 import TableWindow from '../TableWindow/tableView';
-import {ButtonToolbar,Dropdown,MenuItem,Glyphicon} from 'react-bootstrap';
+import {ButtonToolbar,MenuItem,Glyphicon} from 'react-bootstrap';
+import Dropdown, {Menu} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 
  /* eslint-disable react/no-multi-comp*/
@@ -153,29 +154,28 @@ export default class MainLayout extends Component {
              */
             stack.on('activeContentItemChanged', function (contentItem) {
                 stack.header.controlsContainer.children('.alertCommands').remove();
-              const buttonInstance = (            
-                <ButtonToolbar>
-                    <Dropdown id="dropdown-custom-1"  >
-                    <CustomToggle bsRole="toggle">
-                        <Glyphicon glyph="cog" />
-                    </CustomToggle>
-                    <Dropdown.Menu className="">
-                      <MenuItem divider />
-                        <MenuItem eventKey="1">Low Priority (1)</MenuItem>
-                         <MenuItem eventKey="2" active >Medium Priority (2)</MenuItem>
-                          <MenuItem eventKey="3">High Priority (3)</MenuItem>
-                           <MenuItem eventKey="4">Highest Priority (4)</MenuItem>
-                          <MenuItem divider />
-                        <MenuItem eventKey="6">Color (Red)</MenuItem>
-                        
-                        <MenuItem divider />
-                        <MenuItem eventKey="7" >Export to PNG</MenuItem>
-                        <MenuItem eventKey="8" >Export to CSV</MenuItem>
-                    </Dropdown.Menu>
-                    </Dropdown>
-                </ButtonToolbar>
-
-);
+//               const buttonInstance = (
+//                 <ButtonToolbar>
+//                     <Dropdown id="dropdown-custom-1"  >
+//                     <CustomToggle bsRole="toggle">
+//                         <Glyphicon glyph="cog" />
+//                     </CustomToggle>
+//                     <Menu className="">
+//                       <MenuItem divider />
+//                         <MenuItem eventKey="1">Low Priority (1)</MenuItem>
+//                          <MenuItem eventKey="2" active >Medium Priority (2)</MenuItem>
+//                           <MenuItem eventKey="3">High Priority (3)</MenuItem>
+//                            <MenuItem eventKey="4">Highest Priority (4)</MenuItem>
+//                           <MenuItem divider />
+//                         <MenuItem eventKey="6">Color (Red)</MenuItem>
+//
+//                         <MenuItem divider />
+//                         <MenuItem eventKey="7" >Export to PNG</MenuItem>
+//                         <MenuItem eventKey="8" >Export to CSV</MenuItem>
+//                     </Menu>
+//                     </Dropdown>
+//                 </ButtonToolbar>
+// );
 
                    
 
@@ -184,7 +184,7 @@ export default class MainLayout extends Component {
 
                     stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
                     stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
-                    ReactDOM.render(buttonInstance,  stack.header.controlsContainer.children('.cogSettings')[0]);
+            //        ReactDOM.render(buttonInstance,  stack.header.controlsContainer.children('.cogSettings')[0]);
                 }
             });
 
