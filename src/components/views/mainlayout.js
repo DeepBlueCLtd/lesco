@@ -53,59 +53,60 @@ const layoutConfig = {
                 component: 'Search Criteria',
                 title: 'Search Criteria'
             }, {
-                    type: 'stack',
-                    content: [{
-                        type: 'react-component',
-                        component: 'Alert Wall',
-                        title: 'Alert1'
-                    }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert2',
-                            props: { title: 'Alert 1', color: '#0000FF' }
-                        }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert3',
-                            props: { title: 'Alert 1', color: '#00FFFF' }
-                        }, {
-                            type: 'react-component',
-                            component: 'Alert Wall',
-                            title: 'Alert6',
-                            props: { title: 'Alert 1', color: '#FFFFFF' }
+                type: 'stack',
+                content: [{
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert1',
+                    props: {title: 'Alert 1', color: '#53eb53'}
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert2',
+                    props: {title: 'Alert 2', color: '#eb4f4f'}
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert3',
+                    props: {title: 'Alert 3', color: '#eb9650'}
+                }, {
+                    type: 'react-component',
+                    component: 'Alert Wall',
+                    title: 'Alert4',
+                    props: {title: 'Alert 4', color: '#4febeb'}
 
-                        }
-                    ]
                 }
+                ]
+            }
             ]
         }, {
-                type: 'row',
+            type: 'row',
+            content: [{
+                type: 'column',
+                width: 50,
                 content: [{
-                    type: 'column',
-                    width: 50,
+                    type: 'stack',
+                    height: 50,
                     content: [{
-                        type: 'stack',
-                        height: 50,
-                        content: [{
-                            type: 'react-component',
-                            component: 'Table',
-                            title: 'Table'
-                        }, {
-                                type: 'react-component',
-                                component: 'Map',
-                                title: 'Map'
-                            }, {
-                                type: 'react-component',
-                                component: 'Cloud',
-                                title: 'Cloud'
-                            }, {
-                                type: 'react-component',
-                                component: 'Histogram',
-                                title: 'Histogram'
-                            }]
+                        type: 'react-component',
+                        component: 'Table',
+                        title: 'Table'
+                    }, {
+                        type: 'react-component',
+                        component: 'Map',
+                        title: 'Map'
+                    }, {
+                        type: 'react-component',
+                        component: 'Cloud',
+                        title: 'Cloud'
+                    }, {
+                        type: 'react-component',
+                        component: 'Histogram',
+                        title: 'Histogram'
                     }]
                 }]
             }]
+        }]
     }]
 };
 // eslint-disable-next-line react/no-multi-comp
@@ -123,6 +124,9 @@ export default class MainLayout extends Component {
                 return (<QueryWindow/>)
             }
         });
+
+        var alertCtr = 1;
+
         const alertWall = React.createClass({
             componentDidMount: function () {
 
@@ -136,7 +140,7 @@ export default class MainLayout extends Component {
             },
             render: function () {
 
-                return (<h1>test component 3</h1>)
+                return (<h1>Alert Window {alertCtr++}</h1>)
             }
 
         })
@@ -163,16 +167,19 @@ export default class MainLayout extends Component {
                                 <Glyphicon glyph="cog" />
                             </CustomToggle>
                             <DropdownMenu className="">
+                                <MenuItem eventKey="1">Load in Search Window</MenuItem>
+                                <MenuItem eventKey="1">Change perspective ></MenuItem>
                                 <MenuItem divider />
-                                <MenuItem eventKey="1">Low Priority (1) </MenuItem>
-                                <MenuItem eventKey="2" active >Medium Priority (2) </MenuItem>
-                                <MenuItem eventKey="3">High Priority (3) </MenuItem>
-                                <MenuItem eventKey="4">Highest Priority (4) </MenuItem>
+                                <MenuItem eventKey="1">Color ></MenuItem>
+                                <MenuItem eventKey="1">Audio ></MenuItem>
+                                <MenuItem eventKey="1">[x] Active</MenuItem>
+                                <MenuItem eventKey="1">[x] Intelligent downsample</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem eventKey="6">Color (Red) </MenuItem>
+                                <MenuItem eventKey="1">Export to CSV</MenuItem>
+                                <MenuItem eventKey="1">Export to PNG</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem eventKey="7" >Export to PNG</MenuItem>
-                                <MenuItem eventKey="8" >Export to CSV</MenuItem>
+                                <MenuItem eventKey="1">Save this configuration</MenuItem>
+                                <MenuItem eventKey="1">Share this configuration</MenuItem>
                             </DropdownMenu>
                         </Dropdown>
                     </ButtonToolbar>
