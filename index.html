@@ -8,21 +8,26 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <link type="text/css" rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-base.css" />
         <link type="text/css" rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-light-theme.css" />
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
         <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />
         <style>
-/*
+            /*
 In order to preserve the uniform grid appearance, all cell styles need to have padding, margin and border sizes.
 No built-in (selected, editable, highlight, flashing, invalid, loading, :focus) or user-specified CSS
 classes should alter those!
 */
-
-    <style>
-            .lm_title
-            {
-                font-size:150%
+            
+            <style> .lm_content {
+                overflow: scroll;
+            }
+            
+            .lm_title {
+                font-size: 150%;
+                color: black;
             }
             
             .slick-header.ui-state-default,
@@ -445,8 +450,6 @@ classes should alter those!
                 border: 2px solid rgba(100, 100, 100, 0.3);
                 border-radius: 4px;
                 background: rgba(100, 100, 100, 0.1);
-
-
                 /* base colours used in alert windows */
                 /* note - they have been made lighter by using WebStorm to chage their */
                 /* brightness to 20 */
@@ -454,7 +457,6 @@ classes should alter those!
                 /*color: #AA3939;*/
                 /*color: #AA6C39;*/
                 /*color: #226666;*/
-
             }
             
             .group--header:after,
