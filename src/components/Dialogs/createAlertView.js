@@ -22,10 +22,12 @@ export default class createAlerView extends Component {
                     <Col xs={6} md={6}>
                         <div>
                             <Well bsSize="large">
-                                <Button onClick={this.close}>Map</Button>
-                                <Button onClick={this.close}>Table</Button>
-                                <Button onClick={this.close}>Cards</Button>
-                                <Button onClick={this.close}>Histogram</Button>
+
+                      <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='map-marker' style={{fontSize:'250%'}} /></Button>
+                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='list-alt' style={{fontSize:'250%'}} /></Button>
+                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='signal' style={{fontSize:'250%'}} /></Button>
+                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='th-large' style={{ fontSize: '250%' }}/></Button>
+                                 <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='cloud' style={{fontSize:'250%'}}/></Button>
                             </Well>
 
                         </div>
@@ -36,13 +38,12 @@ export default class createAlerView extends Component {
                                 <h5>Configure Alert</h5>
                                 <FormGroup>
                                     <FieldGroup label="Alert Name"  type="text"/>
-                                    <Checkbox >
-                                        Inteligent Sample Rate
-                                    </Checkbox>
                                     <Checkbox>
                                         Audio Alert
                                     </Checkbox>
-
+                                    <Checkbox >
+                                        Intelligent Sample Rate
+                                    </Checkbox>
                                 </FormGroup>
                             </Well>
 
