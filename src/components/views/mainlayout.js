@@ -3,8 +3,32 @@ import React, {Component} from 'react';
 import QueryWindow from '../SearchWindow/querybuilder';
 import MapWindow from '../MapWindow/mapView';
 import TableWindow from '../TableWindow/tableView';
+import {ButtonToolbar,Dropdown,MenuItem,Glyphicon} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 
 const GoldenLayout = require('golden-layout');
+
+
+class CustomToggle extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+
+    this.props.onClick(e);
+  }
+
+  render() {
+    return (
+           <Glyphicon glyph="cog" onClick={this.handleClick} />
+    );
+  }
+}
+
 
 //configuration for the layout
 const layoutConfig = {
@@ -126,13 +150,32 @@ export default class MainLayout extends Component {
              */
             stack.on('activeContentItemChanged', function (contentItem) {
                 stack.header.controlsContainer.children('.alertCommands').remove();
+              const buttonInstance = (            
+                <ButtonToolbar>
+                    <Dropdown id="dropdown-custom-1"  >
+                    <CustomToggle bsRole="toggle">
+                        <Glyphicon glyph="cog" />
+                    </CustomToggle>
+                    <Dropdown.Menu className="">
+                        <MenuItem eventKey="1">Priority (1)</MenuItem>
+                        <MenuItem eventKey="2">Color (Red)</MenuItem>
+                        <MenuItem divider />
+                        <MenuItem eventKey="3" >Export to PNG</MenuItem>
+                        <MenuItem eventKey="4" >Export to CSV</MenuItem>
+                    </Dropdown.Menu>
+                    </Dropdown>
+                </ButtonToolbar>
+
+);
+
+                   
+
                 // interact with the contentItem
                 if (contentItem.config.component == 'Alert Wall') {
 
-                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
-
-                    stack.header.controlsContainer.prepend('<li class="alertCommands"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></li>');
-
+                    stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
+                    stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
+                    ReactDOM.render(buttonInstance,  stack.header.controlsContainer.children('.cogSettings')[0]);
                 }
             });
 
