@@ -13,7 +13,7 @@ function FieldGroup({ id, label, help, ...props }) {
     );
 }
 
-
+const buttonStyle = { fontSize: '250%', color: '#1B75BB' };
 export default class createAlerView extends Component {
     render() {
         return (
@@ -23,11 +23,11 @@ export default class createAlerView extends Component {
                         <div>
                             <Well bsSize="large">
 
-                      <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='map-marker' style={{fontSize:'250%'}} /></Button>
-                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='list-alt' style={{fontSize:'250%'}} /></Button>
-                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='signal' style={{fontSize:'250%'}} /></Button>
-                                    <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='th-large' style={{ fontSize: '250%' }}/></Button>
-                                 <Button bsSize="large" onClick={this.close}><Glyphicon bsSize='large' glyph='cloud' style={{fontSize:'250%'}}/></Button>
+                               <Button bsSize="large" bsClass='btn btn-default text-center' style={{width:'100px'}} onClick={this.close}><Glyphicon  glyph='map-marker' style={buttonStyle} /> <br/>Map</Button>
+                                    <Button bsSize="large" bsClass='btn btn-default text-center' style={{width:'100px'}}  onClick={this.close}><Glyphicon  glyph='list-alt' style={buttonStyle}  /> <br/>Table</Button>
+                                    <Button bsSize="large" bsClass='btn btn-default text-center' style={{width:'100px'}} onClick={this.close}><Glyphicon  glyph='signal' style={buttonStyle}  /> <br/>Histogram</Button>
+                                    <Button bsSize="large" bsClass='btn btn-default text-center' style={{width:'100px'}}  onClick={this.close}><Glyphicon  glyph='th-large' style={buttonStyle} /><br/>Cards</Button>
+                                    <Button bsSize="large" bsClass='btn btn-default text-center' style={{width:'100px'}}  onClick={this.close}><Glyphicon  glyph='cloud' style={buttonStyle} /><br/>Cloud</Button>
                             </Well>
 
                         </div>

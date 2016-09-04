@@ -50,11 +50,11 @@ function getEditor({field, operator, value, onChange}) {
     if (field == 'time' && operator == 'last') {
         return (
             <select className='form-control'>
-                <option value="last-15m">Last 15 mins</option>
-                <option value="last-h">Last hour</option>
-                <option value="last-12h">Last 12 hours</option>
-                <option value="last-day">Last day</option>
-                <option value="last-week">Last week</option>
+                <option value="last-15m">15 mins</option>
+                <option value="last-h">1 hour</option>
+                <option value="last-12h">12 hours</option>
+                <option value="last-day">Day</option>
+                <option value="last-week">Week</option>
             </select>
         )
     }
@@ -66,6 +66,17 @@ function getEditor({field, operator, value, onChange}) {
                 <option value="k-c">keyword-c</option>
                 <option value="k-d">keyword-d</option>
                 <option value="k-e">keyword-e</option>
+            </select>
+        )
+    }
+    if (field == 'keyword' && operator == 'savedList') {
+        return (
+            <select className='form-control'>
+                <option value="s-a">Stores</option>
+                <option value="s-b">Parties</option>
+                <option value="s-c">Holidays</option>
+                <option value="s-d">Sports</option>
+                <option value="s-e">Schools</option>
             </select>
         )
     }
@@ -101,7 +112,7 @@ function getOperators(field) {
         return [{ name: 'true', label: 'Yes' }, { name: 'false', label: 'no' }];
     } else if (field == 'keyword') {
         return [{ name: 'true', label: 'Contains' }, { name: 'false', label: 'Doesn\'t contain' },
-            { name: 'equals', label: 'Equals' }];
+            { name: 'equals', label: 'Equals' },{ name: 'savedList', label: 'Saved list' } ];
     } else if (field == 'time') {
         return [{ name: 'before', label: 'Before' }, { name: 'after', label: 'After' },
             { name: 'between', label: 'Between' }, { name: 'last', label: 'Last' }];
