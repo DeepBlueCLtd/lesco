@@ -26,6 +26,7 @@ export default class createAlerView extends Component {
                                 <Button onClick={this.close}>Table</Button>
                                 <Button onClick={this.close}>Cards</Button>
                                 <Button onClick={this.close}>Histogram</Button>
+                                <Button onClick={this.close}>Tag cloud</Button>
                             </Well>
 
                         </div>
@@ -36,13 +37,12 @@ export default class createAlerView extends Component {
                                 <h5>Configure Alert</h5>
                                 <FormGroup>
                                     <FieldGroup label="Alert Name"  type="text"/>
-                                    <Checkbox >
-                                        Inteligent Sample Rate
-                                    </Checkbox>
                                     <Checkbox>
                                         Audio Alert
                                     </Checkbox>
-
+                                    <Checkbox >
+                                        Intelligent Sample Rate
+                                    </Checkbox>
                                 </FormGroup>
                             </Well>
 
