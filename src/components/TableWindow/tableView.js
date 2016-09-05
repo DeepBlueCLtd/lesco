@@ -15,17 +15,17 @@ export default class TableView extends Component {
         this.props.glContainer.on('resize', function () {
             setTimeout(function () {
                 me.resizeGrid(me.refs.grid._slickgrid);
-            }, 1);
+            }, 5);
         });
         this.props.glContainer.on('open', function () {
             setTimeout(function () {
                 me.resizeGrid(me.refs.grid._slickgrid);
-            }, 1);
+            }, 5);
         });
         this.props.glContainer.on('show', function () {
             setTimeout(function () {
                 me.resizeGrid(me.refs.grid._slickgrid);
-            }, 1);
+            }, 5);
         });
     }
 
@@ -50,7 +50,7 @@ export default class TableView extends Component {
             <div style={{ position: 'relative', height: '100%', width: '100%' }}>
                 <SlickGrid ref='grid'  id={id}
                     data = {data}
-                    table= {id + 'asdasd_dasdig'}
+                    table= {id + '_table'}
                     settings={settings} />
             </div>
 
