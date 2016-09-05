@@ -1,7 +1,19 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 const MapApi = require('leaflet');
-import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,Well} from 'react-bootstrap';
+import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,FormGroup,ControlLabel,HelpBlock,FormControl} from 'react-bootstrap';
+
+
+function FieldGroup({ id, label, help, ...props }) {
+    return (
+        <FormGroup controlId={id}>
+            <ControlLabel>{label}</ControlLabel>
+            <FormControl {...props} />
+            {help && <HelpBlock>{help}</HelpBlock>}
+        </FormGroup>
+    );
+}
+
 
 const buttonStyle = {
     width : '120px'
@@ -23,7 +35,7 @@ const mapPopOver = (
 
 const searchPopOver = (
   <Popover id="popover-positioned-left" title="Map">
-  Tmp
+    <FieldGroup label="Search"  type="text"/>
   </Popover>
 );
 
