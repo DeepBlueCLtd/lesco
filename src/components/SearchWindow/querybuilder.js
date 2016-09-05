@@ -164,8 +164,8 @@ export default class QueryBuilderWindow extends Component {
                 <div className="container-fluid" >
                  <div className="row" >
                  <div style= {{float:'right'}}>
-                    <Button bsStyle='danger'  ><Glyphicon glyph="remove-sign" /> </Button>
-                       <Button bsStyle='primary'  ><Glyphicon glyph="question-sign" /> </Button>
+                    <Button bsStyle='default'  ><Glyphicon glyph="cog" /> </Button>
+                       <Button bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
                        </div>
                  </div>
                     <div className="row" >
