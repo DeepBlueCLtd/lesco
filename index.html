@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
         <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />
         <style>
             /*
 In order to preserve the uniform grid appearance, all cell styles need to have padding, margin and border sizes.
@@ -21,7 +21,33 @@ No built-in (selected, editable, highlight, flashing, invalid, loading, :focus) 
 classes should alter those!
 */
             
-            <style> .lm_content {
+            <style>
+            /***************************************************************************/
+            /*DROP DOWN TO THE RIGHT FOR THE MAP CONTROL*/
+            /***************************************************************************/
+            
+            .rightMenu {
+                position: relative;
+                float: right;
+            }
+            
+            .right-caret {
+                border-bottom: 4px solid transparent;
+                border-top: 4px solid transparent;
+                border-left: 4px solid #000000;
+                display: inline-block;
+                height: 0;
+                opacity: 1;
+                vertical-align: top;
+                width: 0;
+            }
+            
+            .right {
+                float: right;
+            }
+            /***************************************************************************/
+            
+            .lm_content {
                 overflow: scroll;
             }
             
@@ -466,9 +492,11 @@ classes should alter those!
                 display: table;
                 clear: both;
             }
-
             /* dark text for tab labels */
-            .lm_tab.lm_active, .lm_tab:hover, .lm_header .lm_tab {
+            
+            .lm_tab.lm_active,
+            .lm_tab:hover,
+            .lm_header .lm_tab {
                 color: #000;
             }
             
