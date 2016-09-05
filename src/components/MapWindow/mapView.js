@@ -1,10 +1,127 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 const MapApi = require('leaflet');
+import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,Well} from 'react-bootstrap';
+
+const buttonStyle = {
+    width : '120px'
+}
+
+const layerStyle = {
+    width : '150px'
+}
+const mapPopOver = (
+  <Popover id="popover-positioned-left" title="Map">
+     <Button style={buttonStyle}>    <Glyphicon glyph='fullscreen'/> Pan</Button><br/>
+       <Button style={buttonStyle}>    <Glyphicon glyph='repeat'/> Rotate</Button><br/>
+         <Button style={buttonStyle}>    <Glyphicon glyph='resize-full'/> FullScreen</Button><br/>
+           <Button style={buttonStyle}>    <Glyphicon glyph='pencil'/> Draw</Button><br/>
+
+  </Popover>
+);
+
+
+const searchPopOver = (
+  <Popover id="popover-positioned-left" title="Map">
+  Tmp
+  </Popover>
+);
+
+
+const layersPopOver = (
+  <Popover id="popover-positioned-left" title="Map">
+    <div style={layerStyle}>
+      <Button bsClass='btn btn-danger' style={{float:'right',marginTop:'-5px',padding:'2px'}}><Glyphicon glyph='remove' style={{fontSize:'90%'}}/>     </Button>
+    <Checkbox>
+      Facebook
+    </Checkbox>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.25'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.50'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.75'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'1'}}/>
+      <hr/>
+    </div>
+
+<div style={layerStyle}>
+      <Button bsClass='btn btn-danger' style={{float:'right',marginTop:'-5px',padding:'2px'}}><Glyphicon glyph='remove' style={{fontSize:'90%'}}/>     </Button>
+    <Checkbox>
+      Instagram
+    </Checkbox>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.25'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.50'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.75'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'1'}}/>
+      <hr/>
+    </div>
+
+
+    <div style={layerStyle}>
+      <Button bsClass='btn btn-danger' style={{float:'right',marginTop:'-5px',padding:'2px'}}><Glyphicon glyph='remove' style={{fontSize:'90%'}}/>     </Button>
+    <Checkbox>
+      Twitter
+    </Checkbox>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.25'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.50'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.75'}}/>
+    <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'1'}}/>
+      <hr/>
+    </div>
+
+      <Button bsClass='btn btn-default' style={{float:'left',marginTop:'-5px'}}><Glyphicon glyph='road' style={{fontSize:'100%'}}/>     </Button>
+     <Button bsClass='btn btn-success' style={{float:'right',marginTop:'-5px'}}><Glyphicon glyph='plus' style={{fontSize:'100%'}}/>     </Button>
+    
+  
+
+  </Popover>
+);
+
+class MapControls extends Component {
+
+        
+    render() {
+        return (<div>
+         <OverlayTrigger trigger="click" placement="right" overlay={mapPopOver}>
+                <Button>    <Glyphicon glyph='map-marker'/></Button>
+                
+        </OverlayTrigger   ><br/>     
+         <OverlayTrigger trigger="click" placement="right" overlay={searchPopOver}>
+                 <Button>    <Glyphicon glyph='search'/></Button>
+                
+        </OverlayTrigger   >  <br/> 
+         <OverlayTrigger trigger="click" placement="right" overlay={layersPopOver}>
+                <Button>    <Glyphicon glyph='th-list'/></Button>
+                
+        </OverlayTrigger   >   <br/>
+       
+                
+        </div>)
+    }
+}
 
 
 export default class MapWindow extends Component {
     constructor() {
         super();
+    }
+
+    createCustomControls(map) {
+
+        const mapControl = MapApi.Control.extend({
+
+            options: {
+                position: 'topleft'
+                //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+            },
+
+            onAdd: function (map) {
+                var container = MapApi.DomUtil.create('div');
+                ReactDOM.render(<MapControls/>, container);
+                return container;
+            }
+
+        });
+        map.addControl(new mapControl());
+
     }
 
     componentDidMount() {
@@ -21,6 +138,7 @@ export default class MapWindow extends Component {
         });
         map.fitWorld();
         map.invalidateSize();
+        this.createCustomControls(map);
         GlContainer.on('resize', () => {
             map.invalidateSize();
         });
