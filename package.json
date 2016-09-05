@@ -61,7 +61,8 @@
     "react-radio-group": "*",
     "redux": "*",
     "style-loader": "*",
-    "react-slickgrid": "*"
+    "react-slickgrid": "*",
+    "react-google-charts" : "*"
   },
   "config": {
     "host": "localhost",
