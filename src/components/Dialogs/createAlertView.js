@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
 
+function FieldGroup({ id, label, help, ...props,onChange }) {
 
-
-function FieldGroup({ id, label, help, ...props }) {
     return (
         <FormGroup controlId={id}>
             <ControlLabel>{label}</ControlLabel>
-            <FormControl {...props} />
+            <FormControl {...props} onChange={onChange} />
             {help && <HelpBlock>{help}</HelpBlock>}
         </FormGroup>
     );
@@ -37,7 +36,7 @@ export default class createAlerView extends Component {
                             <Well bsSize="large">
                                 <h5>Configure Alert</h5>
                                 <FormGroup>
-                                    <FieldGroup label="Alert Name"  type="text"/>
+                                    <FieldGroup label="Alert Name"  type="text" onChange={this.props.onChange}/>
                                     <Checkbox>
                                         Audio Alert
                                     </Checkbox>

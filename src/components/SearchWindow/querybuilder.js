@@ -112,7 +112,7 @@ function getOperators(field) {
         return [{ name: 'true', label: 'Yes' }, { name: 'false', label: 'no' }];
     } else if (field == 'keyword') {
         return [{ name: 'true', label: 'Contains' }, { name: 'false', label: 'Doesn\'t contain' },
-            { name: 'equals', label: 'Equals' },{ name: 'savedList', label: 'Saved list' } ];
+            { name: 'equals', label: 'Equals' }, { name: 'savedList', label: 'Saved list' }];
     } else if (field == 'time') {
         return [{ name: 'before', label: 'Before' }, { name: 'after', label: 'After' },
             { name: 'between', label: 'Between' }, { name: 'last', label: 'Last' }];
@@ -143,7 +143,10 @@ export default class QueryBuilderWindow extends Component {
         this.state = { showModalView: false, showModalAlert: false };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
-         this.openAlert = this.openAlert.bind(this);
+        this.openAlert = this.openAlert.bind(this);
+        this.createAlertWindow = this.createAlertWindow.bind(this);
+        this.createViewWindow = this.createViewWindow.bind(this);
+        this.state = { viewName: '' };
     }
 
     close() {
@@ -157,6 +160,31 @@ export default class QueryBuilderWindow extends Component {
     openAlert() {
         this.setState({ showModalAlert: true });
     }
+
+    createAlertWindow() {
+
+        const layoutManager = this.props.glContainer.layoutManager;
+        const newItemConfig = {
+            type: 'react-component',
+            component: 'Histogram',
+            title : this.state.viewTitle
+        };
+        layoutManager.root.contentItems[0].addChild(newItemConfig)
+        this.close();
+
+    }
+    createViewWindow() {
+        const layoutManager = this.props.glContainer.layoutManager;
+        const newItemConfig = {
+            type: 'react-component',
+            component: 'Histogram',
+            title : this.state.viewTitle
+
+        };
+        layoutManager.root.contentItems[0].addChild(newItemConfig);
+        this.close();
+    }
+
     render() {
         const {showModalView, showModalAlert} = this.state;
         return (
@@ -189,10 +217,10 @@ export default class QueryBuilderWindow extends Component {
                         <Title>Create Data View</Title>
                     </Header>
                     <Body>
-                        <CreateDataViewDialog/>
+                        <CreateDataViewDialog onChange={(data) => { this.setState({viewTitle : data.target.value}) } } />
                     </Body>
                     <Footer>
-                        <Button  bsStyle="success"onClick={this.close}>Confirm</Button>
+                        <Button  bsStyle="success"onClick={this.createViewWindow}>Confirm</Button>
                         <Button onClick={this.close}>Close</Button>
                     </Footer>
                 </Modal>
@@ -201,10 +229,10 @@ export default class QueryBuilderWindow extends Component {
                         <Title>Create Alert</Title>
                     </Header>
                     <Body>
-                        <CreateAlertViewDialog/>
+                        <CreateAlertViewDialog onChange={(data) => { this.setState({viewTitle : data.target.value}) } }/>
                     </Body>
                     <Footer>
-                        <Button  bsStyle="success"onClick={this.close}>Confirm</Button>
+                        <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>
                         <Button onClick={this.close}>Close</Button>
                     </Footer>
                 </Modal>

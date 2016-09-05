@@ -3,16 +3,16 @@ import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormG
 
 
 
-function FieldGroup({ id, label, help, ...props }) {
+function FieldGroup({ id, label, help, ...props,onChange }) {
+
     return (
         <FormGroup controlId={id}>
             <ControlLabel>{label}</ControlLabel>
-            <FormControl {...props} />
+            <FormControl {...props} onChange={onChange} />
             {help && <HelpBlock>{help}</HelpBlock>}
         </FormGroup>
     );
 }
-
 const buttonStyle = { fontSize: '250%', color: '#1B75BB' };
 export default class createDataViewDialog extends Component {
     render() {
@@ -38,7 +38,7 @@ export default class createDataViewDialog extends Component {
                                     <h5>Configure View</h5>
 
                                     <FormGroup>
-                                        <FieldGroup label="View Name"  type="text"/>
+                                        <FieldGroup label="View Name"  type="text" onChange={this.props.onChange} />
                                         <Checkbox >
                                             Inteligent Sample Rate
                                         </Checkbox>
