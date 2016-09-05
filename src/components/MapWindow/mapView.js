@@ -143,8 +143,8 @@ export default class MapWindow extends Component {
             maxZoom: 20,
             layers: [
                 MapApi.tileLayer(
-                    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    { attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>' })
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    { attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>' })
             ],
             attributionControl: false
         });
