@@ -193,7 +193,12 @@ const layoutConfig = {
 // eslint-disable-next-line react/no-multi-comp
 
 export default class MainLayout extends Component {
-
+    
+    componentWillUnmount(){
+        const layout = this.state.layout;
+        if ( layout)
+        layout.destroy();
+    }
     componentDidMount() {
         const temp = React.createClass({
             render: () => {
@@ -314,6 +319,7 @@ export default class MainLayout extends Component {
         });
 
         layout.init()
+        this.setState({layout});
     }
 
     render() {
