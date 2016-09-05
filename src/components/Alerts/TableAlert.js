@@ -26,6 +26,8 @@ export default class TableAlert extends Component {
         this.props.glContainer.on('tab', (tab) => {
             tab.titleElement.prevObject.css('background-color', color);
         });
+
+     
     }
     render() {
         var settings = {
