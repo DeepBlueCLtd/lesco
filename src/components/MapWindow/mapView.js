@@ -1,15 +1,26 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 const MapApi = require('leaflet');
-import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,Well} from 'react-bootstrap';
+import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,FormGroup,ControlLabel,HelpBlock,FormControl} from 'react-bootstrap';
+
+
+function FieldGroup({ id, label, help, ...props }) {
+    return (
+        <FormGroup controlId={id}>
+            <ControlLabel>{label}</ControlLabel>
+            <FormControl {...props} />
+            {help && <HelpBlock>{help}</HelpBlock>}
+        </FormGroup>
+    );
+}
 
 const buttonStyle = {
     width : '120px'
-}
+};
 
 const layerStyle = {
     width : '150px'
-}
+};
 const mapPopOver = (
   <Popover id="popover-positioned-left" title="Map">
      <Button style={buttonStyle}>    <Glyphicon glyph='fullscreen'/> Pan</Button><br/>
@@ -22,18 +33,18 @@ const mapPopOver = (
 
 
 const searchPopOver = (
-  <Popover id="popover-positioned-left" title="Map">
-  Tmp
+  <Popover id="popover-positioned-left" title="Search">
+    <FieldGroup label="Search"  type="text"/>
   </Popover>
 );
 
 
 const layersPopOver = (
-  <Popover id="popover-positioned-left" title="Map">
+  <Popover id="popover-positioned-left" title="Layers">
     <div style={layerStyle}>
       <Button bsClass='btn btn-danger' style={{float:'right',marginTop:'-5px',padding:'2px'}}><Glyphicon glyph='remove' style={{fontSize:'90%'}}/>     </Button>
     <Checkbox>
-      Facebook
+      Roads
     </Checkbox>
     <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.25'}}/>
     <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.50'}}/>
@@ -45,7 +56,7 @@ const layersPopOver = (
 <div style={layerStyle}>
       <Button bsClass='btn btn-danger' style={{float:'right',marginTop:'-5px',padding:'2px'}}><Glyphicon glyph='remove' style={{fontSize:'90%'}}/>     </Button>
     <Checkbox>
-      Instagram
+      Rivers
     </Checkbox>
     <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.25'}}/>
     <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.50'}}/>
@@ -58,7 +69,7 @@ const layersPopOver = (
     <div style={layerStyle}>
       <Button bsClass='btn btn-danger' style={{float:'right',marginTop:'-5px',padding:'2px'}}><Glyphicon glyph='remove' style={{fontSize:'90%'}}/>     </Button>
     <Checkbox>
-      Twitter
+      Base mapping
     </Checkbox>
     <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.25'}}/>
     <Glyphicon glyph='picture' style={{margin : '3px',fontSize:'150%',opacity:'0.50'}}/>

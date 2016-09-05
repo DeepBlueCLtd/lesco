@@ -190,6 +190,12 @@ export default class QueryBuilderWindow extends Component {
         return (
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                 <div className="container-fluid" >
+                 <div className="row" >
+                 <div style= {{float:'right'}}>
+                    <Button bsStyle='default'  ><Glyphicon glyph="cog" /> </Button>
+                       <Button bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
+                       </div>
+                 </div>
                     <div className="row" >
                         <div className="col-md-2" style={{ minWidth: '110px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
