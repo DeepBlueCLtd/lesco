@@ -21,8 +21,8 @@ const history = syncHistoryWithStore(browserHistory, store);
 const rootEl = document.getElementById('root');
 render(
     <AppContainer>
-        <Provider store={store}>
-            <App/>
+        <Provider store={store}>     
+            <App history={history} store={store}/>
         </Provider>
     </AppContainer>,
     rootEl
@@ -36,7 +36,7 @@ if (module.hot) {
         render(
             <AppContainer>
                 <Provider store={store}>
-                    <NextApp/>
+                    <NextApp history={history} store={store} />
                 </Provider>
             </AppContainer>,
             rootEl
