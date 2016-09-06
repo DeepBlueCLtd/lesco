@@ -19,36 +19,37 @@ const tableData = [
 let counter = 0;
 
 function format(date) {
-  var mm = date.getMonth() + 1; // getMonth() is zero-based
-  var dd = date.getDate();
+    var mm = date.getMonth() + 1; // getMonth() is zero-based
+    var dd = date.getDate();
 
-  return [date.getFullYear(), !mm[1] && '0', mm, !dd[1] && '0', dd].join(''); // padding
+    return [date.getFullYear(), !mm[1] && '0', mm, !dd[1] && '0', dd].join(''); // padding
 }
 
 function simulateRealTimeUpdates(grid) {
     const changes = {};
     counter++;
-    const server = Math.round(Math.random() * 3);
+    const server = Math.round(Math.random() * 3) + 1;
     tableData[server].User = tableData[server].User + "1";
     const date = new Date();
-    const  data =date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()
-    tableData.splice(0, 0, { Time: data , User: 'userA' +  counter , Location: '12.3N 1.3W', Source: 'Twitter', Message: 'message a', Keywords: 'keyword-a' }, )
+    const data = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+    tableData.splice(0, 0, { Time: data, User: 'userA' + counter, Location: '12.3N 1.3W', Source: 'Twitter', Message: 'message a', Keywords: 'keyword-a' }, )
     if (!changes[server]) {
         changes[server] = {};
     }
+    changes[0] = { Time: 'changedGreen', User: 'changedGreen', Location: 'changedGreen', Source: 'changedGreen', Message: 'changedGreen', Keywords: 'changedGreen' }
     changes[server]['User'] = 'changed';
 
     grid.setCellCssStyles('highlight', changes);
-    grid.flashCell(server, 1, 200);
+    grid.flashCell(server, 1, 5000);
     setTimeout(function () {
-        const oh = { server: { User: '' } };
+        const oh = { server: { Time: '', User: '', Location: '', Source: '', Message: '', Keywords: '' } };
         grid.setCellCssStyles('highlight', oh);
-    }, 850);
+    }, 2000);
     grid.invalidateRow(server);
     grid.invalidate();
     setTimeout(function () {
         simulateRealTimeUpdates(grid);
-    }, 1000);
+    }, 2000);
 
 }
 
@@ -64,7 +65,7 @@ export default class TableAlert extends Component {
         const me = this.refs.grid;
         setTimeout(function () {
             simulateRealTimeUpdates(me._slickgrid);
-        }, 1000);
+        }, 2000);
 
     }
     render() {
