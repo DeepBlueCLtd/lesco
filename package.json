@@ -65,7 +65,8 @@
     "react-slickgrid": "*",
     "react-google-charts" : "*",
     "tether-shepherd" : "1.8.0",
-    "file-loader": "*"
+    "file-loader": "*",
+    "leaflet.markercluster" : "*"
   },
   "config": {
     "host": "localhost",

@@ -13,9 +13,9 @@
         <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
         <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd/1.8.0/css/shepherd-theme-dark.css" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd/1.8.0/css/shepherd-theme-dark.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.5.0/MarkerCluster.Default.css" /> 
 
         <style>
             /*
@@ -24,8 +24,23 @@ No built-in (selected, editable, highlight, flashing, invalid, loading, :focus) 
 classes should alter those!
 */
             
+            .leaflet-google-layer {
+                z-index: 0 !important;
+            }
+            
+            .leaflet-map-pane {
+                z-index: 100 !important;
+            }
+            
+
+
+            
             .btnMap {
                 background-color: #fff !important;
+            }
+            
+            .shepherd-element.shepherd-theme-dark .shepherd-content header a.shepherd-cancel-link {
+                color: #ddf;
             }
             
             .btnMap:hover {
@@ -51,12 +66,39 @@ classes should alter those!
                 width: 0;
             }
             
+            @keyframes changed {
+                0% {
+                    background: pink
+                }
+                100% {
+                    background: none;
+                }
+            }
+            
+            .changed {
+                animation: changed 2000ms;
+            }
+
+                @keyframes changedGreen {
+                0% {
+                    background: rgba(250, 255, 28, 0.3);
+                }
+                100% {
+                    background: none;
+                }
+            }
+            
+            .changedGreen {
+                animation: changedGreen 5000ms;
+            }
+
+            
             .right {
                 float: right;
             }
             /***************************************************************************/
             
-            .lm_content {
+            .lm_content .scroll {
                 overflow: scroll;
             }
             
@@ -518,5 +560,5 @@ classes should alter those!
     </head>
     <body>
         <div id="root"></div>
-    <script type="text/javascript" src="vendor.bundle.js?9f90343ba200902f5fe1"></script><script type="text/javascript" src="bundle.js?9f90343ba200902f5fe1"></script></body>
+    <script type="text/javascript" src="vendor.bundle.js?c89a4929cdca29224dcb"></script><script type="text/javascript" src="bundle.js?c89a4929cdca29224dcb"></script></body>
 </html>

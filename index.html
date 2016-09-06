@@ -15,7 +15,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd/1.8.0/css/shepherd-theme-dark.css" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.5.0/MarkerCluster.Default.css" /> 
 
         <style>
             /*
@@ -24,15 +24,25 @@ No built-in (selected, editable, highlight, flashing, invalid, loading, :focus) 
 classes should alter those!
 */
             
+            .leaflet-google-layer {
+                z-index: 0 !important;
+            }
+            
+            .leaflet-map-pane {
+                z-index: 100 !important;
+            }
+            
+
+
+            
             .btnMap {
                 background-color: #fff !important;
             }
-
-            .shepherd-element.shepherd-theme-dark .shepherd-content header a.shepherd-cancel-link
-            {
-                color:#ddf;
+            
+            .shepherd-element.shepherd-theme-dark .shepherd-content header a.shepherd-cancel-link {
+                color: #ddf;
             }
-
+            
             .btnMap:hover {
                 background-color: #f4f4f4 !important;
             }
@@ -79,7 +89,7 @@ classes should alter those!
             }
             
             .changedGreen {
-                animation: changedGreen 2000ms;
+                animation: changedGreen 5000ms;
             }
 
             
@@ -88,8 +98,7 @@ classes should alter those!
             }
             /***************************************************************************/
             
-            .lm_content .scroll
-            {
+            .lm_content .scroll {
                 overflow: scroll;
             }
             

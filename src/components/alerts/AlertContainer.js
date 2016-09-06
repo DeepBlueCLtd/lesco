@@ -22,43 +22,38 @@ const layoutConfig = {
         headerHeight: 25
     },
     content: [
-
         {
-            type: 'row',
+            type: 'column',
             width: 100,
             content: [
                 {
-
-                            type: 'react-component',
-                            component: 'TableAlert',
-                            title: 'New #evening',
-                            props: { title: 'New #evening', color: '#eb4f4f' },
-                            cssClass : ''
-
-                }, {
-                    type: 'column',
-                    width: 33,
+                    type: 'react-component',
+                    component: 'TableAlert',
+                    title: 'New #evening',
+                    props: { title: 'New #evening', color: '#eb4f4f' },
+                    cssClass : ''
+                },
+                {
+                    type: 'row',
+                    width: 30,
                     content: [
-                        {
-                            type: 'react-component',
-                            component: 'HistogramAlert',
-                            title: 'Platforms today',
-                            props: { title: 'Platforms today', color: '#eb9650' },
-                            cssClass : 'scroll'
-                        },
-
                         {
                             type: 'react-component',
                             component: 'CardAlert',
                             title: 'Local imagery',
                             props: { title: 'Local imagery', color: '#4febeb' },
                             cssClass : 'scroll'
-
+                        },
+                        {
+                            type: 'react-component',
+                            component: 'HistogramAlert',
+                            title: 'Platforms today',
+                            props: { title: 'Platforms today', color: '#eb9650' },
+                            cssClass : 'scroll'
                         }
                     ]
-                },
-            ]
-
+                }
+                ]
         }
 
     ]
