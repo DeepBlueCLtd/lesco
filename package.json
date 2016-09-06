@@ -63,7 +63,8 @@
     "redux": "*",
     "style-loader": "*",
     "react-slickgrid": "*",
-    "react-google-charts" : "*"
+    "react-google-charts" : "*",
+    "tether-shepherd" : "1.8.0"
   },
   "config": {
     "host": "localhost",
