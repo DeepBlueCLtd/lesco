@@ -64,7 +64,8 @@
     "style-loader": "*",
     "react-slickgrid": "*",
     "react-google-charts" : "*",
-    "tether-shepherd" : "1.8.0"
+    "tether-shepherd" : "1.8.0",
+    "file-loader": "*"
   },
   "config": {
     "host": "localhost",
