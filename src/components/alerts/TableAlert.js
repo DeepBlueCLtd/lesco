@@ -19,8 +19,6 @@ const tableData = [
 let counter = 0;
 
 function format(date) {
-//    var mm = date.getMonth() + 1; // getMonth() is zero-based
-//    var dd = date.getDate();
     var hrs = date.getHours();
     var mins = date.getMinutes();
     var secs = date.getSeconds();
@@ -33,8 +31,6 @@ function format(date) {
 
     console.log(res);
     return res;
-
-//    return [date.getFullYear(), !mm[1] && '0', mm, !dd[1] && '0', dd, hrs, mins, secs].join(''); // padding
 }
 
 function simulateRealTimeUpdates(grid) {
