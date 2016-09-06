@@ -23,47 +23,58 @@ export default class createDataViewDialog extends Component {
             if (tour.getById('showDatTypes') == null) {
                 tour.addStep('showDatTypes', {
                     text: 'This popup will let you choose how you want to see the data',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' },
+                    showCancelLink: true
                 });
                 tour.addStep('showMapBtn', {
                     text: 'You could choose a slippy map',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnMap), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnMap), on: 'right' },
+                    showCancelLink: true
                 });
                 tour.addStep('showtable', {
                     text: 'The tabular presentation carries the most information',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnTable), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnTable), on: 'right' },
+                    showCancelLink: true
                 });
                 tour.addStep('showHistBtn', {
                     text: 'Or a histogram that shows the frequency of some attribute, such as source',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram), on: 'right' },
+                    showCancelLink: true
                 })
                 tour.addStep('showcards', {
                     text: 'And the card view is good for displaying attached imagery',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCards), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCards), on: 'right' },
+                    showCancelLink: true
                 })
                 tour.addStep('showcloudbtn', {
                     text: 'A word cloud may be useful, maybe for trending tags',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCloud), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCloud), on: 'right' },
+                    showCancelLink: true
                 })
                 tour.addStep('showNameLabel', {
                     text: 'Here you name the new view, to help organise your screen. Go on, call it \'M25 within last hour\'',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.viewName), on: 'top' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.viewName), on: 'top' },
+                    showCancelLink: true
                 })
                 tour.addStep('receiveUpdates', {
                     text: 'Here you indicate if you wish to receive near-real time updates',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.chkUpdates), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.chkUpdates), on: 'right' },
+                    showCancelLink: true
                 })
                 tour.addStep('inteligentPooling', {
                     text: 'And if you want the application to vary the pooling rate based on how frequently new items are observed',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.chkPooling), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.chkPooling), on: 'right' },
+                    showCancelLink: true
                 })
                 tour.addStep('existingView', {
                     text: 'Alternatively, you may wish to add the data results to an existing map or table',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' },
+                    showCancelLink: true
                 })
                 tour.addStep('finish', {
                     text: 'Ok, that\'s the end of the walkthrough. Why not close this panel and have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' },
+                    showCancelLink: true
                 })
 
                 tour.next();
