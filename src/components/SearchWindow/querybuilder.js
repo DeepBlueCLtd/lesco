@@ -126,9 +126,9 @@ const startQuery = {
     rules: [
         {
             id: '222',
-            field: 'firstName',
-            value: 'Test',
-            operator: '='
+            field: 'location',
+            value: 'within',
+            operator: 'global'
         }
     ]
 };
