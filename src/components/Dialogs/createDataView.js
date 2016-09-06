@@ -24,15 +24,15 @@ export default class createDataViewDialog extends Component {
                 tour.addStep('showDatTypes', {
                     text: 'This popup will let you choose how you want to see the data',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' }
-                })
+                });
                 tour.addStep('showMapBtn', {
                     text: 'You could choose a slippy map',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnMap), on: 'right' }
-                })
+                });
                 tour.addStep('showtable', {
                     text: 'The tabular presentation carries the most information',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnTable), on: 'right' }
-                })
+                });
                 tour.addStep('showHistBtn', {
                     text: 'Or a histogram that shows the frequency of some attribute, such as source',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram ), on: 'right' }
@@ -46,22 +46,26 @@ export default class createDataViewDialog extends Component {
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCloud), on: 'right' }
                 })
                 tour.addStep('showNameLabel', {
-                    text: 'Here you name the new view, to help organise your screen',
+                    text: 'Here you name the new view, to help organise your screen. Go on, call it \'M25 within last hour\'',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.viewName), on: 'top' }
                 })
+                tour.addStep('receiveUpdates', {
+                    text: 'Here you indicate if you wish to receive near-real time updates',
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.chkUpdates), on: 'right' }
+                })
                  tour.addStep('inteligentPooling', {
-                    text: 'Here you allow the application to vary the pooling rate based on how frequently new items are observed',
+                    text: 'And if you want the application to vary the pooling rate based on how frequently new items are observed',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.chkPooling), on: 'right' }
                 })
-                  tour.addStep('receiveUpdates', {
-                    text: 'Or you can turn off live updates',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.chkUpdates), on: 'right' }
-                 })
                    tour.addStep('existingView', {
                     text: 'Alternatively, you may wish to add the data results to an existing map or table',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.tabExisting), on: 'top' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' }
                  })
-                
+                tour.addStep('finish', {
+                    text: 'Ok, that\'s the end of the walkthrough. Why not close this panel and have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' }
+                })
+
                 tour.next();
 
             }
@@ -90,11 +94,11 @@ export default class createDataViewDialog extends Component {
                                     <h5>Configure View</h5>
                                     <FormGroup ref='viewName'>
                                         <FieldGroup  label="View Name"  type="text"/>
-                                        <Checkbox ref='chkPooling' >
-                                            Inteligent Sample Rate
-                                        </Checkbox>
-                                        <Checkbox  ref='chkUpdates'  >
+                                        <Checkbox checked ref='chkUpdates'  >
                                             Receive Updates
+                                        </Checkbox>
+                                        <Checkbox checked ref='chkPooling' >
+                                            Inteligent Sample Rate
                                         </Checkbox>
                                     </FormGroup>
                                 </Well>
@@ -103,7 +107,7 @@ export default class createDataViewDialog extends Component {
                     </Row>
                 </Grid>
             </Tab>
-            <Tab   eventKey={2} title="Add to Existing">
+            <Tab ref="tabExisting"  eventKey={2} title="Add to Existing">
                 <FormGroup controlId="formControlsSelectMultiple">
                     <ControlLabel>Multiple select</ControlLabel>
                     <FormControl componentClass="select" multiple>

@@ -164,41 +164,42 @@ export default class QueryBuilderWindow extends Component {
          this.state = { showModalView: false, showModalAlert: false, tour : tour };
      
     }
-    componentDidMount(){
+
+    componentDidMount() {
         const tour = this.state.tour;
-       if ( tour != null && Shepherd.activeTour == null)
-       {
-                   tour.addStep('example',{
-            text : 'Welcome to the mock interface for a generic analysis application. We\'ll start the tour with the search pane',
-            attachTo : {element: this.refs.mainWindow , on: 'right'}
-        })
-        
-        tour.addStep('querywindow',{
-            text : 'Create your query using logical operations. Have a go at requesting data within the M25',
-            attachTo : {element: this.refs.queryData , on: 'right'}
-        })
-        tour.addStep('alertbutton',{
-            text : 'Clicking here would create an Alert Window that will show all new data matching the above criteria',
-            attachTo : {element: ReactDOM.findDOMNode(this.refs.alertButton) , on: 'bottom'}
-        })
-       tour.addStep('querywindow',{
-           text : 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
-           attachTo : {element: this.refs.queryData , on: 'right'}
-       })
-        tour.addStep('viewButton',{
-            text : 'Now you can create a map that shows all data in the M25, for the last hour',
-            attachTo : {element: ReactDOM.findDOMNode(this.refs.dataButton) , on: 'top'}
-        })
-         tour.addStep('clickViewButton',{
-            text : 'Click the Create Data View Button to get started.',
-            attachTo : {element: ReactDOM.findDOMNode(this.refs.dataButton) , on: 'top'},
-            buttons : []
-        })
-       
-        
+        if (tour != null && Shepherd.activeTour == null) {
+            tour.addStep('example', {
+                text: 'Welcome to the mock interface for a generic analysis application. We\'ll start the tour with the search pane',
+                attachTo: {element: this.refs.mainWindow, on: 'right'}
+            })
+            tour.addStep('helpBtn', {
+                text: '(don\'t forget, there will be user guidance here)',
+                attachTo: {element: ReactDOM.findDOMNode(this.refs.helpBtn), on: 'bottom'}
+            })
+            tour.addStep('querywindow', {
+                text: 'Create your query using logical operations. Have a go at requesting data within the M25',
+                attachTo: {element: this.refs.queryData, on: 'right'}
+            })
+            tour.addStep('alertbutton', {
+                text: 'Clicking here would create an Alert Window that will show all new data matching the above criteria, but let\'s not do that just yet',
+                attachTo: {element: ReactDOM.findDOMNode(this.refs.alertButton), on: 'bottom'}
+            })
+            tour.addStep('querywindow', {
+                text: 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
+                attachTo: {element: this.refs.queryData, on: 'right'}
+            })
+            tour.addStep('viewButton', {
+                text: 'Now you can create a map that shows all data in the M25, for the last hour',
+                attachTo: {element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top'}
+            })
+            tour.addStep('clickViewButton', {
+                text: 'Click the Create Data View Button to get started.',
+                attachTo: {element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top'},
+                buttons: []
+            })
             this.state.tour.start();
-       }
-       
+        }
+
     }
     close() {
         this.setState({ showModalView: false });
@@ -221,7 +222,7 @@ export default class QueryBuilderWindow extends Component {
                  <div className="row" >
                  <div style= {{float:'right'}}>
                     <Button bsStyle='default'  ><Glyphicon glyph="cog" /> </Button>
-                       <Button bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
+                       <Button ref="helpBtn" bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
                        </div>
                  </div>
                     <div className="row" >
