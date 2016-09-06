@@ -15,12 +15,12 @@ const tableData = [
     { Time: '12/09/17 16:05:33', User: 'userA', Location: '11.1N 2.1W', Source: 'Facebook', Message: 'message c', Keywords: 'keyword-c' },
     { Time: '12/09/17 16:01:33', User: 'userB', Location: '11.7W 1.3W', Source: 'Instagram', Message: 'message d', Keywords: 'keyword-a' },
     { Time: '12/09/17 16:00:33', User: 'userA', Location: '13.9N 1.2W', Source: 'Facebook', Message: 'message e', Keywords: 'keyword-a' },
-]
+];
 let counter = 0;
 
 function format(date) {
-    var mm = date.getMonth() + 1; // getMonth() is zero-based
-    var dd = date.getDate();
+//    var mm = date.getMonth() + 1; // getMonth() is zero-based
+//    var dd = date.getDate();
     var hrs = date.getHours();
     var mins = date.getMinutes();
     var secs = date.getSeconds();
@@ -66,6 +66,16 @@ function simulateRealTimeUpdates(grid) {
 }
 
 export default class TableAlert extends Component {
+
+
+    resizeGrid(grid) {
+        grid.resizeCanvas();
+        //grid.autosizeColumns();
+        grid.invalidate();
+        grid.render();
+    }
+
+
     componentDidMount() {
         const color = this.props.color || '#000000';
         this.props.glContainer.tab.titleElement.prevObject.css('background-color', this.props.color);
@@ -94,6 +104,8 @@ export default class TableAlert extends Component {
                     table="NFL2"
                     settings={settings}  />
             </div>
+
+
         )
     }
 }

@@ -171,31 +171,38 @@ export default class QueryBuilderWindow extends Component {
         if (tour != null && Shepherd.activeTour == null) {
             tour.addStep('example', {
                 text: 'Welcome to the mock interface for a generic analysis application. We\'ll start the tour with the search pane',
-                attachTo: { element: this.refs.mainWindow, on: 'right' }
+                attachTo: { element: this.refs.mainWindow, on: 'right' },
+                showCancelLink: true
             })
             tour.addStep('helpBtn', {
                 text: '(don\'t forget, there will be user guidance here)',
-                attachTo: { element: ReactDOM.findDOMNode(this.refs.helpBtn), on: 'bottom' }
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.helpBtn), on: 'bottom' },
+                showCancelLink: true
             })
             tour.addStep('querywindow', {
                 text: 'Create your query using logical operations. Have a go at requesting data within the M25',
-                attachTo: { element: this.refs.queryData, on: 'right' }
+                attachTo: { element: this.refs.queryData, on: 'right' },
+                showCancelLink: true
             })
             tour.addStep('alertbutton', {
                 text: 'Clicking here would create an Alert Window that will show all new data matching the above criteria, but let\'s not do that just yet',
-                attachTo: { element: ReactDOM.findDOMNode(this.refs.alertButton), on: 'bottom' }
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.alertButton), on: 'bottom' },
+                showCancelLink: true
             })
             tour.addStep('querywindow', {
                 text: 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
-                attachTo: { element: this.refs.queryData, on: 'right' }
+                attachTo: { element: this.refs.queryData, on: 'right' },
+                showCancelLink: true
             })
             tour.addStep('viewButton', {
                 text: 'Now you can create a map that shows all data in the M25, for the last hour',
-                attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' }
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' },
+                showCancelLink: true
             })
             tour.addStep('clickViewButton', {
                 text: 'Click the Create Data View Button to get started.',
                 attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' },
+                showCancelLink: true,
                 buttons: []
             })
             this.state.tour.start();
@@ -217,7 +224,6 @@ export default class QueryBuilderWindow extends Component {
     }
 
     createAlertWindow() {
-
         const layoutManager = this.props.glContainer.layoutManager;
         const newItemConfig = {
             type: 'react-component',
@@ -266,6 +272,9 @@ export default class QueryBuilderWindow extends Component {
                         </div>
                     </div>
                 </div>
+                <br/>
+                <br/>
+                <br/>
                 <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
                     <Button ref='alertButton' bsStyle='danger' onClick={this.openAlert}  ><Glyphicon glyph="alert" />  Create Alert </Button>
                     <Button ref='dataButton' bsStyle='primary' onClick={this.open} ><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
@@ -290,7 +299,7 @@ export default class QueryBuilderWindow extends Component {
                             <Title>Create Alert</Title>
                         </Header>
                         <Body>
-                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { console.warn('TitleChanged'); this.setState({ viewTitle: data.target.value }) } }/>
+                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { this.setState({ viewTitle: data.target.value }) } }/>
                         </Body>
                         <Footer>
                             <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>
