@@ -16,6 +16,41 @@ const tableData = [
     { Time: '12/09/17 16:01', User: 'userB', Location: '11.7W 1.3W', Source: 'Instagram', Message: 'message d', Keywords: 'keyword-a' },
     { Time: '12/09/17 16:00', User: 'userA', Location: '13.9N 1.2W', Source: 'Facebook', Message: 'message e', Keywords: 'keyword-a' },
 ]
+let counter = 0;
+
+function format(date) {
+  var mm = date.getMonth() + 1; // getMonth() is zero-based
+  var dd = date.getDate();
+
+  return [date.getFullYear(), !mm[1] && '0', mm, !dd[1] && '0', dd].join(''); // padding
+}
+
+function simulateRealTimeUpdates(grid) {
+    const changes = {};
+    counter++;
+    const server = Math.round(Math.random() * 3);
+    tableData[server].User = tableData[server].User + "1";
+    const date = new Date();
+    const  data =date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()
+    tableData.splice(0, 0, { Time: data , User: 'userA' +  counter , Location: '12.3N 1.3W', Source: 'Twitter', Message: 'message a', Keywords: 'keyword-a' }, )
+    if (!changes[server]) {
+        changes[server] = {};
+    }
+    changes[server]['User'] = 'changed';
+
+    grid.setCellCssStyles('highlight', changes);
+    grid.flashCell(server, 1, 200);
+    setTimeout(function () {
+        const oh = { server: { User: '' } };
+        grid.setCellCssStyles('highlight', oh);
+    }, 850);
+    grid.invalidateRow(server);
+    grid.invalidate();
+    setTimeout(function () {
+        simulateRealTimeUpdates(grid);
+    }, 1000);
+
+}
 
 export default class TableAlert extends Component {
     componentDidMount() {
@@ -26,19 +61,22 @@ export default class TableAlert extends Component {
         this.props.glContainer.on('tab', (tab) => {
             tab.titleElement.prevObject.css('background-color', color);
         });
+        const me = this.refs.grid;
+        setTimeout(function () {
+            simulateRealTimeUpdates(me._slickgrid);
+        }, 1000);
 
-     
     }
     render() {
         var settings = {
             multiColumnSort: true,
-     
+
             rowHeight: 26
         };
         return (
-            <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+            <div  style={{ position: 'relative', height: '100%', width: '100%' }}>
 
-                <SlickGrid  id="slick-grid-container2"
+                <SlickGrid ref='grid'  id="slick-grid-container2"
                     data = {tableData}
                     table="NFL2"
                     settings={settings}  />
