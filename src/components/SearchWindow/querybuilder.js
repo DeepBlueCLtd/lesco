@@ -169,24 +169,28 @@ export default class QueryBuilderWindow extends Component {
        if ( tour != null && Shepherd.activeTour == null)
        {
                    tour.addStep('example',{
-            text : 'This is the Search Window.',
+            text : 'Welcome to the mock interface for a generic analysis application. We\'ll start the tour with the search pane',
             attachTo : {element: this.refs.mainWindow , on: 'right'}
         })
         
         tour.addStep('querywindow',{
-            text : 'Create your query by creating Logical Operations. You can add as many as you need.',
+            text : 'Create your query using logical operations. Have a go at requesting data within the M25',
             attachTo : {element: this.refs.queryData , on: 'right'}
         })
         tour.addStep('alertbutton',{
-            text : 'This button creates and Alert with the desired query.',
+            text : 'Clicking here would create an Alert Window that will show all new data matching the above criteria',
             attachTo : {element: ReactDOM.findDOMNode(this.refs.alertButton) , on: 'bottom'}
         })
+       tour.addStep('querywindow',{
+           text : 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
+           attachTo : {element: this.refs.queryData , on: 'right'}
+       })
         tour.addStep('viewButton',{
-            text : 'Similar to the Alert Button, this one creates a DataView!',
+            text : 'Now you can create a map that shows all data in the M25, for the last hour',
             attachTo : {element: ReactDOM.findDOMNode(this.refs.dataButton) , on: 'top'}
         })
          tour.addStep('clickViewButton',{
-            text : 'Click the Create Data View Button to proceed.',
+            text : 'Click the Create Data View Button to get started.',
             attachTo : {element: ReactDOM.findDOMNode(this.refs.dataButton) , on: 'top'},
             buttons : []
         })

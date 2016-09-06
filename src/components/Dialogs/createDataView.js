@@ -22,43 +22,43 @@ export default class createDataViewDialog extends Component {
 
             if (tour.getById('showDatTypes') == null) {
                 tour.addStep('showDatTypes', {
-                    text: 'These buttons allow you to choose the type of DataView to add.',
+                    text: 'This popup will let you choose how you want to see the data',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' }
                 })
                 tour.addStep('showMapBtn', {
-                    text: 'This button creates a Map Data View.',
+                    text: 'You could choose a slippy map',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnMap), on: 'right' }
                 })
-                tour.addStep('showHistBtn', {
-                    text: 'This button creates a Histogram View.',
+                tour.addStep('showtable', {
+                    text: 'The tabular presentation carries the most information',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnTable), on: 'right' }
                 })
-                tour.addStep('showcloudbtn', {
-                    text: 'This button creates a Cloud View.',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram), on: 'right' }
-                })
-                tour.addStep('showtable', {
-                    text: 'This button creates a Table View',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCards), on: 'right' }
+                tour.addStep('showHistBtn', {
+                    text: 'Or a histogram that shows the frequency of some attribute, such as source',
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram ), on: 'right' }
                 })
                 tour.addStep('showcards', {
-                    text: 'This button creates a Cards View',
+                    text: 'And the card view is good for displaying attached imagery',
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCards), on: 'right' }
+                })
+                tour.addStep('showcloudbtn', {
+                    text: 'A word cloud may be useful, maybe for trending tags',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnCloud), on: 'right' }
                 })
                 tour.addStep('showNameLabel', {
-                    text: 'This is the name of the DataView you are creating.',
+                    text: 'Here you name the new view, to help organise your screen',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.viewName), on: 'top' }
                 })
                  tour.addStep('inteligentPooling', {
-                    text: 'This checkbox allows the application to vary the pooling rate based on the update frequency of the data.',
+                    text: 'Here you allow the application to vary the pooling rate based on how frequently new items are observed',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.chkPooling), on: 'right' }
                 })
                   tour.addStep('receiveUpdates', {
-                    text: 'Checking this makes the View Update in Real Time.',
+                    text: 'Or you can turn off live updates',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.chkUpdates), on: 'right' }
                  })
                    tour.addStep('existingView', {
-                    text: 'This Tab allows you to add this Data to a existing View.',
+                    text: 'Alternatively, you may wish to add the data results to an existing map or table',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.tabExisting), on: 'top' }
                  })
                 
