@@ -24,13 +24,13 @@ export default class LoginView extends Component{
                <Grid fluid>
                <Row>
                  <Col xs={2} md={2}>
-                 <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ width: '100%', marginTop: '30px', maxWidth:'200px', marginLeft: '10px', marginBot:'100px' }}/>
+                 <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ width: '100%', marginTop: '60px', maxWidth:'200px', marginLeft: '10px', marginBot:'100px' }}/>
                  </Col>
                    <Col xs={9} md={9}>
                    <br/>
                     <br/>
-                    <h1 style={{fontSize:'50px',color:''}}>Welcome to Lesco!</h1>
-                    <h4 style= {{fontSize:'30px', marginLeft:'5px',marginTop:'-20px',color:'blue'}}>the bulk data analysis tool</h4>
+                    <h1>Welcome to Lesco</h1>
+                    <h2>you haz data?</h2>
                    </Col>
                
                </Row>
