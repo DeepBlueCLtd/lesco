@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 const GoldenLayout = require('golden-layout');
 import {ButtonToolbar, Dropdown, Glyphicon, MenuItem} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import MapAlert from '../Alerts/MapAlert';
-import TableAlert from '../Alerts/TableAlert';
-import HistogramAlert from '../Alerts/HistogramAlert';
-import CloudAlert from '../Alerts/CloudAlert';
-import CardAlert from '../Alerts/CardAlert';
+import MapAlert from './MapAlert';
+import TableAlert from './TableAlert';
+import HistogramAlert from './HistogramAlert';
+import CloudAlert from './CloudAlert';
+import CardAlert from './CardAlert';
 import CustomToggle from'../common/CustomToggle';
 const DropdownMenu = Dropdown.Menu;
 
