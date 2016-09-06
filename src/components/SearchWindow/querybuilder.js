@@ -217,7 +217,6 @@ export default class QueryBuilderWindow extends Component {
     }
 
     createAlertWindow() {
-
         const layoutManager = this.props.glContainer.layoutManager;
         const newItemConfig = {
             type: 'react-component',
@@ -266,6 +265,9 @@ export default class QueryBuilderWindow extends Component {
                         </div>
                     </div>
                 </div>
+                <br/>
+                <br/>
+                <br/>
                 <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
                     <Button ref='alertButton' bsStyle='danger' onClick={this.openAlert}  ><Glyphicon glyph="alert" />  Create Alert </Button>
                     <Button ref='dataButton' bsStyle='primary' onClick={this.open} ><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
@@ -290,7 +292,7 @@ export default class QueryBuilderWindow extends Component {
                             <Title>Create Alert</Title>
                         </Header>
                         <Body>
-                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { console.warn('TitleChanged'); this.setState({ viewTitle: data.target.value }) } }/>
+                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { this.setState({ viewTitle: data.target.value }) } }/>
                         </Body>
                         <Footer>
                             <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>

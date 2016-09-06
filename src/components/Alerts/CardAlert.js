@@ -9,13 +9,11 @@ imgSource[3] = require('../../static/image4.jpg');
 imgSource[4] = require('../../static/image5.jpg');
 export default class CardAlert extends Component {
     render() {
-
-
         return (
-            <div style={{ overflow: 'scroll', position: 'relative', width: '100%', height: '100%' }}>
+            <div style={{position: 'relative', width: '100%', height: '100%' }}>
                 <div>
                     {imgSource.map((x) => {
-                        return <div key={x} style={{width: '48%', height: '48%' ,display:'inline'}}>
+                        return <div key={x} style={{ width: '48%', height: '48%', display: 'inline' }}>
                             <img   src={x} style= {{ margin: '1%', width: '48%', height: '48%', maxHeight: '100px', objectFit: 'cover' }}/>
                         </div>
                     }) }
