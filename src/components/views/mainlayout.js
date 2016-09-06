@@ -161,30 +161,28 @@ const layoutConfig = {
                         type: 'stack',
                         height: 50,
                         content: [{
-
+                            type: 'react-component',
+                            component: 'Map',
+                            title: 'Map'
+                        }, {
                             type: 'react-component',
                             component: 'Table',
                             title: 'Table',
-                            props: { data: table1Data }
+                            props: {data: table1Data}
                         }, {
-
-                                type: 'react-component',
-                                component: 'Table',
-                                title: 'Table 2',
-                                props: { data: table2Data }
-                            }, {
-                                type: 'react-component',
-                                component: 'Map',
-                                title: 'Map'
-                            }, {
-                                type: 'react-component',
-                                component: 'Cloud',
-                                title: 'Cloud'
-                            }, {
-                                type: 'react-component',
-                                component: 'Histogram',
-                                title: 'Histogram'
-                            }]
+                            type: 'react-component',
+                            component: 'Table',
+                            title: 'Table 2',
+                            props: {data: table2Data}
+                        // }, {
+                        //     type: 'react-component',
+                        //     component: 'Cloud',
+                        //     title: 'Cloud'
+                        // }, {
+                        //     type: 'react-component',
+                        //     component: 'Histogram',
+                        //     title: 'Histogram'
+                        }]
                     }]
                 }]
             }]

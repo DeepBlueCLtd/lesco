@@ -1,13 +1,16 @@
 import React, { Component} from 'react';
 
-
+const imgSource = [
+];
+imgSource[0] = require('../../static/image1.jpg');
+imgSource[1] = require('../../static/image2.jpg');
+imgSource[2] = require('../../static/image3.jpg');
+imgSource[3] = require('../../static/image4.jpg');
+imgSource[4] = require('../../static/image5.jpg');
 export default class CardAlert extends Component {
     render() {
 
-        const imgSource = ['https://pixabay.com/static/uploads/photo/2014/10/25/00/28/selfie-501994_960_720.jpg',
-            'https://upload.wikimedia.org/wikipedia/commons/9/93/Ameily_Radke.jpg', 'https://static.pexels.com/photos/7823/selfie.jpg',
-            'https://pixabay.com/static/uploads/photo/2014/05/23/23/42/man-352477_960_720.jpg', 'https://pixabay.com/static/uploads/photo/2016/03/01/06/07/woman-1229779_960_720.jpg'
-        ]
+
         return (
             <div style={{ overflow: 'scroll', position: 'relative', width: '100%', height: '100%' }}>
                 <div>

@@ -130,9 +130,9 @@ const startQuery = {
     rules: [
         {
             id: '222',
-            field: 'firstName',
-            value: 'Test',
-            operator: '='
+            field: 'location',
+            value: 'within',
+            operator: 'global'
         }
     ]
 };
@@ -167,33 +167,39 @@ export default class QueryBuilderWindow extends Component {
         this.state = { showModalView: false, showModalAlert: false, tour: tour };
 
     }
+
     componentDidMount() {
         const tour = this.state.tour;
         if (tour != null && Shepherd.activeTour == null) {
             tour.addStep('example', {
-                text: 'This is the Search Window.',
+                text: 'Welcome to the mock interface for a generic analysis application. We\'ll start the tour with the search pane',
                 attachTo: { element: this.refs.mainWindow, on: 'right' }
             })
-
+            tour.addStep('helpBtn', {
+                text: '(don\'t forget, there will be user guidance here)',
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.helpBtn), on: 'bottom' }
+            })
             tour.addStep('querywindow', {
-                text: 'Create your query by creating Logical Operations. You can add as many as you need.',
+                text: 'Create your query using logical operations. Have a go at requesting data within the M25',
                 attachTo: { element: this.refs.queryData, on: 'right' }
             })
             tour.addStep('alertbutton', {
-                text: 'This button creates and Alert with the desired query.',
+                text: 'Clicking here would create an Alert Window that will show all new data matching the above criteria, but let\'s not do that just yet',
                 attachTo: { element: ReactDOM.findDOMNode(this.refs.alertButton), on: 'bottom' }
             })
+            tour.addStep('querywindow', {
+                text: 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
+                attachTo: { element: this.refs.queryData, on: 'right' }
+            })
             tour.addStep('viewButton', {
-                text: 'Similar to the Alert Button, this one creates a DataView!',
+                text: 'Now you can create a map that shows all data in the M25, for the last hour',
                 attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' }
             })
             tour.addStep('clickViewButton', {
-                text: 'Click the Create Data View Button to proceed.',
+                text: 'Click the Create Data View Button to get started.',
                 attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' },
                 buttons: []
             })
-
-
             this.state.tour.start();
         }
 
@@ -244,13 +250,13 @@ export default class QueryBuilderWindow extends Component {
                     <div className="row" >
                         <div style= {{ float: 'right' }}>
                             <Button bsStyle='default'  ><Glyphicon glyph="cog" /> </Button>
-                            <Button bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
+                            <Button ref="helpBtn" bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
                         </div>
                     </div>
                     <div className="row" >
                         <div className="col-md-2" style={{ minWidth: '110px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/>
+                                <a href="index.html"><img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/></a>
                             </div>
                         </div>
                         <div ref="queryData"  className="col-xs-10" >
