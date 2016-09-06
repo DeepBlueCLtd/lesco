@@ -95,12 +95,11 @@ export default class createDataViewDialog extends Component {
 
                                     <FormGroup ref='viewName'>
                                         <FieldGroup  label="View Name"  type="text" onChange={this.props.onChange}/>
-                                        <Checkbox ref='chkPooling' >
-                                            Inteligent Sample Rate
-                                        </Checkbox>
-
                                         <Checkbox checked ref='chkUpdates'  >
                                             Receive Updates
+                                        </Checkbox>
+                                        <Checkbox ref='chkPooling' >
+                                            Inteligent Sample Rate
                                         </Checkbox>
                                     </FormGroup>
                                 </Well>
