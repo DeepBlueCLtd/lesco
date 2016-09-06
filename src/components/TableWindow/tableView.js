@@ -27,6 +27,8 @@ export default class TableView extends Component {
                 me.resizeGrid(me.refs.grid._slickgrid);
             }, 5);
         });
+
+       
     }
 
     resizeGrid(grid) {

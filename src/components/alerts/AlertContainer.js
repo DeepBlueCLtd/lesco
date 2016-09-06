@@ -28,23 +28,13 @@ const layoutConfig = {
             width: 100,
             content: [
                 {
-                    type: 'column',
-                    width: 33,
-                    content: [
-                        {
-                            type: 'react-component',
-                            component: 'MapAlert',
-                            title: 'New #dinner',
-                            props: { title: 'New #dinner', color: '#53eb53' },
-                         
-                        }, {
+
                             type: 'react-component',
                             component: 'TableAlert',
                             title: 'New #evening',
                             props: { title: 'New #evening', color: '#eb4f4f' },
                             cssClass : ''
-                        }
-                    ]
+
                 }, {
                     type: 'column',
                     width: 33,
@@ -55,20 +45,7 @@ const layoutConfig = {
                             title: 'Platforms today',
                             props: { title: 'Platforms today', color: '#eb9650' },
                             cssClass : 'scroll'
-                        }, {
-                            type: 'react-component',
-                            component: 'CloudAlert',
-                            title: 'Trending this hour',
-                            props: { title: 'Trending this hour', color: '#4febeb' },
-                          
-
-                        }
-                    ]
-                },
-                {
-                    type: 'column',
-                    width: 33,
-                    content: [
+                        },
 
                         {
                             type: 'react-component',
@@ -79,9 +56,7 @@ const layoutConfig = {
 
                         }
                     ]
-                }
-
-
+                },
             ]
 
         }
