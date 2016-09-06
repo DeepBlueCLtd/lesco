@@ -138,8 +138,6 @@ const startQuery = {
 };
 
 
-
-
 export default class QueryBuilderWindow extends Component {
 
     constructor(prop) {
@@ -235,7 +233,7 @@ export default class QueryBuilderWindow extends Component {
         const newItemConfig = {
             type: 'react-component',
             component: 'Histogram',
-            title: this.state.viewTitle || 'No Title'
+            title: this.state.viewTitle
 
         };
         layoutManager.root.contentItems[0].addChild(newItemConfig);
@@ -292,7 +290,7 @@ export default class QueryBuilderWindow extends Component {
                             <Title>Create Alert</Title>
                         </Header>
                         <Body>
-                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { this.setState({ viewTitle: data.target.value }) } }/>
+                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { console.warn('TitleChanged'); this.setState({ viewTitle: data.target.value }) } }/>
                         </Body>
                         <Footer>
                             <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>
