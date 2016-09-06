@@ -56,6 +56,33 @@ classes should alter those!
                 width: 0;
             }
             
+            @keyframes changed {
+                0% {
+                    background: pink
+                }
+                100% {
+                    background: none;
+                }
+            }
+            
+            .changed {
+                animation: changed 2000ms;
+            }
+
+                @keyframes changedGreen {
+                0% {
+                    background: rgba(250, 255, 28, 0.3);
+                }
+                100% {
+                    background: none;
+                }
+            }
+            
+            .changedGreen {
+                animation: changedGreen 2000ms;
+            }
+
+            
             .right {
                 float: right;
             }
