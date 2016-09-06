@@ -171,7 +171,7 @@ export default class QueryBuilderWindow extends Component {
                     <div className="row" >
                         <div className="col-md-2" style={{ minWidth: '110px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/>
+                                <a href="index.html"><img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/></a>
                             </div>
                         </div>
                         <div className="col-xs-10" >
