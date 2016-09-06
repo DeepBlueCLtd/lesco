@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
+import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock,Radio} from 'react-bootstrap';
 
 function FieldGroup({ id, label, help, ...props,onChange }) {
 
@@ -34,7 +34,6 @@ export default class createAlerView extends Component {
                     <Col xs={6} md={6}>
                         <div>
                             <Well bsSize="large">
-                                <h5>Configure Alert</h5>
                                 <FormGroup>
                                     <FieldGroup label="Alert Name"  type="text" onChange={this.props.onChange}/>
                                     <Checkbox>
@@ -43,6 +42,26 @@ export default class createAlerView extends Component {
                                     <Checkbox >
                                         Intelligent Sample Rate
                                     </Checkbox>
+                                    <b>Select Priority</b>
+                                     <FormGroup>
+      <Radio inline>
+        1
+      </Radio>
+      {' '}
+      <Radio inline>
+        2
+      </Radio>
+      {' '}
+      <Radio inline>
+        3
+      </Radio>
+      <Radio inline>
+        4
+      </Radio>
+      <Radio inline>
+        5
+      </Radio>
+    </FormGroup>
                                 </FormGroup>
                             </Well>
 

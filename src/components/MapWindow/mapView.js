@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 const MapApi = require('leaflet');
-import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,FormGroup,ControlLabel,HelpBlock,FormControl} from 'react-bootstrap';
+import {Button,Glyphicon,OverlayTrigger,Popover,Checkbox,FormGroup,ControlLabel,HelpBlock,FormControl,ButtonGroup} from 'react-bootstrap';
 
 
 function FieldGroup({ id, label, help, ...props }) {
@@ -90,19 +90,20 @@ class MapControls extends Component {
 
         
     render() {
-        return (<div>
+        return (<div style={{maxWidth:'26px'}}>
+         
          <OverlayTrigger trigger="click" placement="right" overlay={mapPopOver}>
-                <Button>    <Glyphicon glyph='map-marker'/></Button>
+                <Button bsClass='btnMap' style={{padding:'5px', fontSize:'12px',borderRadius:'0px',borderTopLeftRadius:'4px',borderTopRightRadius:'4px',borderColor:'rgba(0,0,0,0)',backgroundImage:'null',borderBottom:'1px solid #ccc'}}>    <Glyphicon glyph='map-marker' style={{}}/></Button>
                 
-        </OverlayTrigger   ><br/>     
+        </OverlayTrigger   >   
          <OverlayTrigger trigger="click" placement="right" overlay={searchPopOver}>
-                 <Button>    <Glyphicon glyph='search'/></Button>
+                 <Button bsClass='btnMap' style={{padding:'5px', fontSize:'12px',borderRadius:'0px',borderColor:'rgba(0,0,0,0)',backgroundImage:'null',borderBottom:'1px solid #ccc'}}>    <Glyphicon glyph='search'/></Button>
                 
-        </OverlayTrigger   >  <br/> 
+        </OverlayTrigger   > 
          <OverlayTrigger trigger="click" placement="right" overlay={layersPopOver}>
-                <Button>    <Glyphicon glyph='th-list'/></Button>
+                <Button bsClass='btnMap' style={{padding:'5px', fontSize:'12px',borderRadius:'0px',borderBottomLeftRadius:'4px',borderBottomRightRadius:'4px',borderColor:'rgba(0,0,0,0)',backgroundImage:'null',borderBottom:'1px solid #ccc'}}>    <Glyphicon glyph='th-list'/></Button>
                 
-        </OverlayTrigger   >   <br/>
+        </OverlayTrigger   > 
        
                 
         </div>)
@@ -125,7 +126,7 @@ export default class MapWindow extends Component {
             },
 
             onAdd: function (map) {
-                var container = MapApi.DomUtil.create('div');
+                var container = MapApi.DomUtil.create('div','leaflet-control-zoom leaflet-bar leaflet-control');
                 ReactDOM.render(<MapControls/>, container);
                 return container;
             }
@@ -142,8 +143,8 @@ export default class MapWindow extends Component {
             maxZoom: 20,
             layers: [
                 MapApi.tileLayer(
-                    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    { attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>' })
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    { attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>' })
             ],
             attributionControl: false
         });

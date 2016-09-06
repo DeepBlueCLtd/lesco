@@ -1,8 +1,12 @@
 import {QueryBuilder} from 'react-querybuilder';
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
 import CreateDataViewDialog from '../Dialogs/createDataView';
 import CreateAlertViewDialog from '../Dialogs/createAlertView';
+
+import Shepherd from'tether-shepherd';
+
 const {Footer, Body, Header, Title} = Modal;
 /* eslint-disable react/prop-types*/
 
@@ -140,24 +144,76 @@ export default class QueryBuilderWindow extends Component {
 
     constructor(prop) {
         super(prop);
-        this.state = { showModalView: false, showModalAlert: false };
+       
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
         this.openAlert = this.openAlert.bind(this);
+<<<<<<< HEAD
         this.createAlertWindow = this.createAlertWindow.bind(this);
         this.createViewWindow = this.createViewWindow.bind(this);
         this.state = { viewName: '' };
     }
+=======
+        //Create the example tour
+         const tour =new  Shepherd.Tour({
+            defaults : {
+                classes :'shepherd-theme-dark',
+                scrollTo : true
+            }
+        });
+>>>>>>> DeepBlueCLtd-master
 
+        const me = this;
+        tour.on('complete', ()=>{
+            if ( tour.steps.length > 6)
+                me.setState({tour :null});
+        })
+         this.state = { showModalView: false, showModalAlert: false, tour : tour };
+     
+    }
+    componentDidMount(){
+        const tour = this.state.tour;
+       if ( tour != null && Shepherd.activeTour == null)
+       {
+                   tour.addStep('example',{
+            text : 'This is the Search Window.',
+            attachTo : {element: this.refs.mainWindow , on: 'right'}
+        })
+        
+        tour.addStep('querywindow',{
+            text : 'Create your query by creating Logical Operations. You can add as many as you need.',
+            attachTo : {element: this.refs.queryData , on: 'right'}
+        })
+        tour.addStep('alertbutton',{
+            text : 'This button creates and Alert with the desired query.',
+            attachTo : {element: ReactDOM.findDOMNode(this.refs.alertButton) , on: 'bottom'}
+        })
+        tour.addStep('viewButton',{
+            text : 'Similar to the Alert Button, this one creates a DataView!',
+            attachTo : {element: ReactDOM.findDOMNode(this.refs.dataButton) , on: 'top'}
+        })
+         tour.addStep('clickViewButton',{
+            text : 'Click the Create Data View Button to proceed.',
+            attachTo : {element: ReactDOM.findDOMNode(this.refs.dataButton) , on: 'top'},
+            buttons : []
+        })
+       
+        
+            this.state.tour.start();
+       }
+       
+    }
     close() {
         this.setState({ showModalView: false });
         this.setState({ showModalAlert: false })
     }
 
     open() {
+        
         this.setState({ showModalView: true });
     }
     openAlert() {
+      
         this.setState({ showModalAlert: true });
     }
 
@@ -188,7 +244,7 @@ export default class QueryBuilderWindow extends Component {
     render() {
         const {showModalView, showModalAlert} = this.state;
         return (
-            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+            <div  ref="mainWindow" style={{ width: '100%', height: '100%', position: 'relative' }}>
                 <div className="container-fluid" >
                  <div className="row" >
                  <div style= {{float:'right'}}>
@@ -202,9 +258,9 @@ export default class QueryBuilderWindow extends Component {
                                 <img src="https://github.com/DeepBlueCLtd/lesco/raw/master/logo.png" style={{ height: '100px', marginTop: '30px', marginLeft: '10px' }}/>
                             </div>
                         </div>
-                        <div className="col-xs-10" >
-                            <Well  >
-                                <strong>Create your search query</strong>
+                        <div ref="queryData"  className="col-xs-10" >
+                            <Well   >
+                                <strong  >Create your search query</strong>
                                 <QueryBuilder query={startQuery} fields={fields}
                                     onQueryChange={logQuery} getEditor={getEditor} getOperators={getOperators} controlClassnames= {CSSClass}/>
                             </Well>
@@ -212,18 +268,18 @@ export default class QueryBuilderWindow extends Component {
                     </div>
                 </div>
                 <div style={{ position: 'absolute', bottom: 0, right: 0 }}>
-                    <Button bsStyle='danger' onClick={this.openAlert}  ><Glyphicon glyph="alert" />  Create Alert </Button>
-                    <Button bsStyle='primary' onClick={this.open} ><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
+                    <Button ref='alertButton' bsStyle='danger' onClick={this.openAlert}  ><Glyphicon glyph="alert" />  Create Alert </Button>
+                    <Button ref='dataButton' bsStyle='primary' onClick={this.open} ><Glyphicon glyph="eye-open" /> Show in Data View  </Button>
                     <div style={{ clear: 'both' }}></div>
                 </div>
 
-
-                <Modal show={showModalView} onHide={this.close}>
+            <div ref='dataViewDialog' >
+                <Modal   show={showModalView} onHide={this.close}>
                     <Header closeButton>
                         <Title>Create Data View</Title>
                     </Header>
                     <Body>
-                        <CreateDataViewDialog onChange={(data) => { this.setState({viewTitle : data.target.value}) } } />
+                        <CreateDataViewDialog  tour={this.state.tour} onChange={(data) => { this.setState({viewTitle : data.target.value}) } }/>
                     </Body>
                     <Footer>
                         <Button  bsStyle="success"onClick={this.createViewWindow}>Confirm</Button>
@@ -235,16 +291,17 @@ export default class QueryBuilderWindow extends Component {
                         <Title>Create Alert</Title>
                     </Header>
                     <Body>
-                        <CreateAlertViewDialog onChange={(data) => { this.setState({viewTitle : data.target.value}) } }/>
+                        <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { this.setState({viewTitle : data.target.value}) } }/>
                     </Body>
                     <Footer>
                         <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>
                         <Button onClick={this.close}>Close</Button>
                     </Footer>
                 </Modal>
+                </div>
+                </div>
 
-
-            </div >)
+         )
     }
 }
 
