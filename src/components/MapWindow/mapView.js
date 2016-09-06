@@ -143,7 +143,7 @@ export default class MapWindow extends Component {
             minZoom: 2,
             maxZoom: 20,
             worldCopyJump : true,
-            center:  MapApi.latLng(51.5074,-0.1278),
+            center:  MapApi.latLng(51.56, -0.06),
             layers: [
                 MapApi.tileLayer(
                     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -152,7 +152,7 @@ export default class MapWindow extends Component {
             attributionControl: false
         });
         map.invalidateSize();
-        map.setView(MapApi.latLng(51.5074,-0.1278), 7);
+        map.setView(MapApi.latLng(51.56, -0.06), 9);
         this.createCustomControls(map);
 
 
