@@ -1,7 +1,7 @@
 import {QueryBuilder} from 'react-querybuilder';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Glyphicon, Well, Modal, Tabs, Tab, Grid, Row, Col, Alert, FormGroup, Checkbox, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
+import { Button, Glyphicon, Well, Modal} from 'react-bootstrap';
 import CreateDataViewDialog from '../Dialogs/createDataView';
 import CreateAlertViewDialog from '../Dialogs/createAlertView';
 
@@ -116,7 +116,7 @@ function getOperators(field) {
         return [{ name: 'true', label: 'Yes' }, { name: 'false', label: 'no' }];
     } else if (field == 'keyword') {
         return [{ name: 'true', label: 'Contains' }, { name: 'false', label: 'Doesn\'t contain' },
-            { name: 'equals', label: 'Equals' },{ name: 'savedList', label: 'Saved list' } ];
+            { name: 'equals', label: 'Equals' }, { name: 'savedList', label: 'Saved list' }];
     } else if (field == 'time') {
         return [{ name: 'before', label: 'Before' }, { name: 'after', label: 'After' },
             { name: 'between', label: 'Between' }, { name: 'last', label: 'Last' }];
@@ -138,31 +138,32 @@ const startQuery = {
 };
 
 
-
-
 export default class QueryBuilderWindow extends Component {
 
     constructor(prop) {
         super(prop);
-       
+
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
         this.openAlert = this.openAlert.bind(this);
+        this.createAlertWindow = this.createAlertWindow.bind(this);
+        this.createViewWindow = this.createViewWindow.bind(this);
+        this.state = { viewName: '' };
         //Create the example tour
-         const tour =new  Shepherd.Tour({
-            defaults : {
-                classes :'shepherd-theme-dark',
-                scrollTo : true
+        const tour = new Shepherd.Tour({
+            defaults: {
+                classes: 'shepherd-theme-dark',
+                scrollTo: true
             }
         });
 
         const me = this;
-        tour.on('complete', ()=>{
-            if ( tour.steps.length > 6)
-                me.setState({tour :null});
+        tour.on('complete', () => {
+            if (tour.steps.length > 6)
+                me.setState({ tour: null });
         })
-         this.state = { showModalView: false, showModalAlert: false, tour : tour };
-     
+        this.state = { showModalView: false, showModalAlert: false, tour: tour };
+
     }
 
     componentDidMount() {
@@ -170,31 +171,31 @@ export default class QueryBuilderWindow extends Component {
         if (tour != null && Shepherd.activeTour == null) {
             tour.addStep('example', {
                 text: 'Welcome to the mock interface for a generic analysis application. We\'ll start the tour with the search pane',
-                attachTo: {element: this.refs.mainWindow, on: 'right'}
+                attachTo: { element: this.refs.mainWindow, on: 'right' }
             })
             tour.addStep('helpBtn', {
                 text: '(don\'t forget, there will be user guidance here)',
-                attachTo: {element: ReactDOM.findDOMNode(this.refs.helpBtn), on: 'bottom'}
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.helpBtn), on: 'bottom' }
             })
             tour.addStep('querywindow', {
                 text: 'Create your query using logical operations. Have a go at requesting data within the M25',
-                attachTo: {element: this.refs.queryData, on: 'right'}
+                attachTo: { element: this.refs.queryData, on: 'right' }
             })
             tour.addStep('alertbutton', {
                 text: 'Clicking here would create an Alert Window that will show all new data matching the above criteria, but let\'s not do that just yet',
-                attachTo: {element: ReactDOM.findDOMNode(this.refs.alertButton), on: 'bottom'}
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.alertButton), on: 'bottom' }
             })
             tour.addStep('querywindow', {
                 text: 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
-                attachTo: {element: this.refs.queryData, on: 'right'}
+                attachTo: { element: this.refs.queryData, on: 'right' }
             })
             tour.addStep('viewButton', {
                 text: 'Now you can create a map that shows all data in the M25, for the last hour',
-                attachTo: {element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top'}
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' }
             })
             tour.addStep('clickViewButton', {
                 text: 'Click the Create Data View Button to get started.',
-                attachTo: {element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top'},
+                attachTo: { element: ReactDOM.findDOMNode(this.refs.dataButton), on: 'top' },
                 buttons: []
             })
             this.state.tour.start();
@@ -207,24 +208,49 @@ export default class QueryBuilderWindow extends Component {
     }
 
     open() {
-        
+
         this.setState({ showModalView: true });
     }
     openAlert() {
-      
+
         this.setState({ showModalAlert: true });
     }
+
+    createAlertWindow() {
+
+        const layoutManager = this.props.glContainer.layoutManager;
+        const newItemConfig = {
+            type: 'react-component',
+            component: 'TableAlert',
+            title: this.state.viewTitle
+        };
+        layoutManager.root.contentItems[0].addChild(newItemConfig)
+        this.close();
+
+    }
+    createViewWindow() {
+        const layoutManager = this.props.glContainer.layoutManager;
+        const newItemConfig = {
+            type: 'react-component',
+            component: 'Histogram',
+            title: this.state.viewTitle
+
+        };
+        layoutManager.root.contentItems[0].addChild(newItemConfig);
+        this.close();
+    }
+
     render() {
         const {showModalView, showModalAlert} = this.state;
         return (
             <div  ref="mainWindow" style={{ width: '100%', height: '100%', position: 'relative' }}>
                 <div className="container-fluid" >
-                 <div className="row" >
-                 <div style= {{float:'right'}}>
-                    <Button bsStyle='default'  ><Glyphicon glyph="cog" /> </Button>
-                       <Button ref="helpBtn" bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
-                       </div>
-                 </div>
+                    <div className="row" >
+                        <div style= {{ float: 'right' }}>
+                            <Button bsStyle='default'  ><Glyphicon glyph="cog" /> </Button>
+                            <Button ref="helpBtn" bsStyle='info'  ><Glyphicon glyph="question-sign" /> </Button>
+                        </div>
+                    </div>
                     <div className="row" >
                         <div className="col-md-2" style={{ minWidth: '110px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -246,35 +272,35 @@ export default class QueryBuilderWindow extends Component {
                     <div style={{ clear: 'both' }}></div>
                 </div>
 
-            <div ref='dataViewDialog' >
-                <Modal   show={showModalView} onHide={this.close}>
-                    <Header closeButton>
-                        <Title>Create Data View</Title>
-                    </Header>
-                    <Body>
-                        <CreateDataViewDialog  tour={this.state.tour}/>
-                    </Body>
-                    <Footer>
-                        <Button  bsStyle="success"onClick={this.close}>Confirm</Button>
-                        <Button onClick={this.close}>Close</Button>
-                    </Footer>
-                </Modal>
-                <Modal show={showModalAlert} onHide={this.close}>
-                    <Header closeButton>
-                        <Title>Create Alert</Title>
-                    </Header>
-                    <Body>
-                        <CreateAlertViewDialog tour={this.state.tour}/>
-                    </Body>
-                    <Footer>
-                        <Button  bsStyle="success"onClick={this.close}>Confirm</Button>
-                        <Button onClick={this.close}>Close</Button>
-                    </Footer>
-                </Modal>
+                <div ref='dataViewDialog' >
+                    <Modal   show={showModalView} onHide={this.close}>
+                        <Header closeButton>
+                            <Title>Create Data View</Title>
+                        </Header>
+                        <Body>
+                            <CreateDataViewDialog  tour={this.state.tour} onChange={(data) => { this.setState({ viewTitle: data.target.value }) } }/>
+                        </Body>
+                        <Footer>
+                            <Button  bsStyle="success"onClick={this.createViewWindow}>Confirm</Button>
+                            <Button onClick={this.close}>Close</Button>
+                        </Footer>
+                    </Modal>
+                    <Modal show={showModalAlert} onHide={this.close}>
+                        <Header closeButton>
+                            <Title>Create Alert</Title>
+                        </Header>
+                        <Body>
+                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { console.warn('TitleChanged'); this.setState({ viewTitle: data.target.value }) } }/>
+                        </Body>
+                        <Footer>
+                            <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>
+                            <Button onClick={this.close}>Close</Button>
+                        </Footer>
+                    </Modal>
                 </div>
-                </div>
+            </div>
 
-         )
+        )
     }
 }
 

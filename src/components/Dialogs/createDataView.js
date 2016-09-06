@@ -4,16 +4,16 @@ import Shepherd from'tether-shepherd';
 import ReactDOM from 'react-dom';
 
 
-function FieldGroup({ id, label, help, ...props }) {
+function FieldGroup({ id, label, help, ...props, onChange }) {
+
     return (
         <FormGroup controlId={id}>
             <ControlLabel>{label}</ControlLabel>
-            <FormControl {...props} />
+            <FormControl {...props} onChange={onChange} />
             {help && <HelpBlock>{help}</HelpBlock>}
         </FormGroup>
     );
 }
-
 const buttonStyle = { fontSize: '250%', color: '#1B75BB' };
 export default class createDataViewDialog extends Component {
     componentDidMount() {
@@ -35,7 +35,7 @@ export default class createDataViewDialog extends Component {
                 });
                 tour.addStep('showHistBtn', {
                     text: 'Or a histogram that shows the frequency of some attribute, such as source',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram ), on: 'right' }
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.btnHistogram), on: 'right' }
                 })
                 tour.addStep('showcards', {
                     text: 'And the card view is good for displaying attached imagery',
@@ -53,14 +53,14 @@ export default class createDataViewDialog extends Component {
                     text: 'Here you indicate if you wish to receive near-real time updates',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.chkUpdates), on: 'right' }
                 })
-                 tour.addStep('inteligentPooling', {
+                tour.addStep('inteligentPooling', {
                     text: 'And if you want the application to vary the pooling rate based on how frequently new items are observed',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.chkPooling), on: 'right' }
                 })
-                   tour.addStep('existingView', {
+                tour.addStep('existingView', {
                     text: 'Alternatively, you may wish to add the data results to an existing map or table',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' }
-                 })
+                })
                 tour.addStep('finish', {
                     text: 'Ok, that\'s the end of the walkthrough. Why not close this panel and have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' }
@@ -92,12 +92,13 @@ export default class createDataViewDialog extends Component {
                             <div>
                                 <Well bsSize="large">
                                     <h5>Configure View</h5>
+
                                     <FormGroup ref='viewName'>
-                                        <FieldGroup  label="View Name"  type="text"/>
+                                        <FieldGroup  label="View Name"  type="text" onChange={this.props.onChange}/>
                                         <Checkbox checked ref='chkUpdates'  >
                                             Receive Updates
                                         </Checkbox>
-                                        <Checkbox checked ref='chkPooling' >
+                                        <Checkbox ref='chkPooling' >
                                             Inteligent Sample Rate
                                         </Checkbox>
                                     </FormGroup>

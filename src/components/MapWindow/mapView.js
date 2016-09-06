@@ -14,14 +14,13 @@ function FieldGroup({ id, label, help, ...props }) {
     );
 }
 
-
 const buttonStyle = {
     width : '120px'
-}
+};
 
 const layerStyle = {
     width : '150px'
-}
+};
 const mapPopOver = (
   <Popover id="popover-positioned-left" title="Map">
      <Button style={buttonStyle}>    <Glyphicon glyph='fullscreen'/> Pan</Button><br/>

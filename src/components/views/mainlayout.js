@@ -203,11 +203,7 @@ export default class MainLayout extends Component {
                 return (<h1>test component 3</h1>)
             }
         });
-        const queryWidget = React.createClass({
-            render: () => {
-                return (<QueryWindow/>)
-            }
-        });
+      
 
         var alertCtr = 1;
 
@@ -228,7 +224,7 @@ export default class MainLayout extends Component {
         })
 
         const layout = new GoldenLayout(layoutConfig);
-        layout.registerComponent('Search Criteria', queryWidget);
+        layout.registerComponent('Search Criteria', QueryWindow);
 
         layout.registerComponent('MapAlert', MapAlert);
         layout.registerComponent('TableAlert', TableAlert);
