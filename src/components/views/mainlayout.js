@@ -66,7 +66,7 @@ const layoutConfig = {
             content: [
                 {
                     type: 'row',
-                    height: 50,
+                    height: 40,
                     content: [{
                         type: 'react-component',
                         component: 'Search Criteria',
@@ -76,7 +76,7 @@ const layoutConfig = {
                 },
                 {
                     type: 'row',
-                    height: 50,
+                    height: 60,
                     content: [{
                         type: 'react-component',
                         component: 'AlertContainer',
