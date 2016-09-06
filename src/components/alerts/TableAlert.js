@@ -18,6 +18,16 @@ const tableData = [
 ]
 
 export default class TableAlert extends Component {
+
+
+    resizeGrid(grid) {
+        grid.resizeCanvas();
+        //grid.autosizeColumns();
+        grid.invalidate();
+        grid.render();
+    }
+
+
     componentDidMount() {
         const color = this.props.color || '#000000';
         this.props.glContainer.tab.titleElement.prevObject.css('background-color', this.props.color);
@@ -26,23 +36,39 @@ export default class TableAlert extends Component {
         this.props.glContainer.on('tab', (tab) => {
             tab.titleElement.prevObject.css('background-color', color);
         });
-
-     
+        const me = this;
+        this.props.glContainer.on('resize', function () {
+            setTimeout(function () {
+                me.resizeGrid(me.refs.grid._slickgrid);
+            }, 5);
+        });
+        this.props.glContainer.on('open', function () {
+            setTimeout(function () {
+                me.resizeGrid(me.refs.grid._slickgrid);
+            }, 5);
+        });
+        this.props.glContainer.on('show', function () {
+            setTimeout(function () {
+                me.resizeGrid(me.refs.grid._slickgrid);
+            }, 5);
+        });
     }
     render() {
         var settings = {
             multiColumnSort: true,
-     
             rowHeight: 26
         };
         return (
-            <div style={{ position: 'relative', height: '100%', width: '100%' }}>
 
-                <SlickGrid  id="slick-grid-container2"
+
+            <div style={{ position: 'relative', width: '100%', height: '100%' }} >
+                <SlickGrid ref='grid'  id="slick-grid-container2"
                     data = {tableData}
                     table="NFL2"
                     settings={settings}  />
             </div>
+
+
         )
     }
 }

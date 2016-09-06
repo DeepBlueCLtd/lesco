@@ -4,17 +4,15 @@ import MapWindow from '../MapWindow/mapView';
 import TableWindow from '../TableWindow/tableView';
 import {ButtonToolbar, Dropdown, Glyphicon, MenuItem} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
+import CustomToggle from '../common/CustomToggle';
+import AlertContainer from '../alerts/AlertContainer';
+const DropdownMenu = Dropdown.Menu;
 
-import MapAlert from '../Alerts/MapAlert';
-import TableAlert from '../Alerts/TableAlert';
-import HistogramAlert from '../Alerts/HistogramAlert';
-import CloudAlert from '../Alerts/CloudAlert';
-import CardAlert from '../Alerts/CardAlert';
 
 function isAlert(t) {
     return t == 'MapAlert' || t == 'TableAlert' || t == 'HistogramAlert' || t == 'CloudAlert' || (t.indexOf('Alert') !== -1);
 }
-const DropdownMenu = Dropdown.Menu;
+
 
 
 /* eslint-disable react/no-multi-comp*/
@@ -22,25 +20,6 @@ const DropdownMenu = Dropdown.Menu;
 const GoldenLayout = require('golden-layout');
 
 
-class CustomToggle extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(e) {
-        e.preventDefault();
-
-        this.props.onClick(e);
-    }
-
-    render() {
-        return (
-            <Glyphicon glyph="cog" onClick={this.handleClick} />
-        );
-    }
-}
 
 
 const table1Data = [
@@ -91,65 +70,18 @@ const layoutConfig = {
                     content: [{
                         type: 'react-component',
                         component: 'Search Criteria',
-                        title: 'Search Criteria'
+                        title: 'Search Criteria',
+                        cssClass : 'scroll'
                     }]
                 },
                 {
                     type: 'row',
                     height: 50,
                     content: [{
-                        type: 'column',
-                        width: 33,
-                        content: [
-                            {
-                                type: 'react-component',
-                                component: 'MapAlert',
-                                title: 'New #dinner',
-                                props: { title: 'New #dinner', color: '#53eb53' }
-                            }, {
-                                type: 'react-component',
-                                component: 'TableAlert',
-                                title: 'New #evening',
-                                props: { title: 'New #evening', color: '#eb4f4f' }
-                            }
-                        ]
-                    }, {
-                            type: 'column',
-                            width: 33,
-                            content: [
-                                {
-                                    type: 'react-component',
-                                    component: 'HistogramAlert',
-                                    title: 'Platforms today',
-                                    props: { title: 'Platforms today', color: '#eb9650' }
-                                }, {
-                                    type: 'react-component',
-                                    component: 'CloudAlert',
-                                    title: 'Trending this hour',
-                                    props: { title: 'Trending this hour', color: '#4febeb' }
-
-                                }
-                            ]
-
-
-                        },
-                        {
-                            type: 'column',
-                            width: 33,
-                            content: [
-
-                                {
-                                    type: 'react-component',
-                                    component: 'CardAlert',
-                                    title: 'Local imagery',
-                                    props: { title: 'Local imagery', color: '#4febeb' }
-
-                                }
-                            ]
-                        }
-
-
-                    ]
+                        type: 'react-component',
+                        component: 'AlertContainer',
+                        title: 'Alert Wall'
+                    }]
                 }
             ]
         }, {
@@ -165,24 +97,26 @@ const layoutConfig = {
                             component: 'Map',
                             title: 'Map'
                         }, {
-                            type: 'react-component',
-                            component: 'Table',
-                            title: 'Table',
-                            props: {data: table1Data}
-                        }, {
-                            type: 'react-component',
-                            component: 'Table',
-                            title: 'Table 2',
-                            props: {data: table2Data}
-                        // }, {
-                        //     type: 'react-component',
-                        //     component: 'Cloud',
-                        //     title: 'Cloud'
-                        // }, {
-                        //     type: 'react-component',
-                        //     component: 'Histogram',
-                        //     title: 'Histogram'
-                        }]
+                                type: 'react-component',
+                                component: 'Table',
+                                title: 'Table',
+                                props: { data: table1Data },
+                                cssClass : 'scroll'
+                            }, {
+                                type: 'react-component',
+                                component: 'Table',
+                                title: 'Table 2',
+                                props: { data: table2Data },
+                                cssClass : 'scroll'
+                                // }, {
+                                //     type: 'react-component',
+                                //     component: 'Cloud',
+                                //     title: 'Cloud'
+                                // }, {
+                                //     type: 'react-component',
+                                //     component: 'Histogram',
+                                //     title: 'Histogram'
+                            }]
                     }]
                 }]
             }]
@@ -191,49 +125,32 @@ const layoutConfig = {
 // eslint-disable-next-line react/no-multi-comp
 
 export default class MainLayout extends Component {
-    
-    componentWillUnmount(){
+
+    constructor(props) {
+        super(props);
+        const layout = new GoldenLayout(layoutConfig);
+        this.state = { layout };
+    }
+    componentWillUnmount() {
         const layout = this.state.layout;
-        if ( layout)
-        layout.destroy();
+        if (layout)
+            layout.destroy();
     }
     componentDidMount() {
+        const layout = this.state.layout;
         const temp = React.createClass({
             render: () => {
                 return (<h1>test component 3</h1>)
             }
         });
-      
 
-        var alertCtr = 1;
 
-        const alertWall = React.createClass({
-            componentDidMount: function () {
 
-                const color = this.props.color || '#000000';
-                this.props.glContainer.tab.titleElement.prevObject.css('background-color', this.props.color);
-                this.props.glContainer.tab.setTitle(this.props.title || 'No Title');
-                // eslint-disable-next-line react/prop-types
-                this.props.glContainer.on('tab', (tab) => {
-                    tab.titleElement.prevObject.css('background-color', color);
-                });
-            },
-            render: function () {
-                return (<h1>Alert Window {alertCtr++}</h1>)
-            }
-        })
 
-        const layout = new GoldenLayout(layoutConfig);
         layout.registerComponent('Search Criteria', QueryWindow);
 
-        layout.registerComponent('MapAlert', MapAlert);
-        layout.registerComponent('TableAlert', TableAlert);
-        layout.registerComponent('HistogramAlert', HistogramAlert);
-        layout.registerComponent('CloudAlert', CloudAlert);
-        layout.registerComponent('Alert Wall', alertWall);
+        layout.registerComponent('AlertContainer', AlertContainer);
         layout.registerComponent('Histogram', temp);
-        layout.registerComponent('CardAlert', CardAlert);
-
         layout.registerComponent('Cloud', temp);
         layout.registerComponent('Map', MapWindow);
         layout.registerComponent('Table', TableWindow);
@@ -292,12 +209,7 @@ export default class MainLayout extends Component {
 
 
                 // interact with the contentItem
-                if (isAlert(contentItem.config.component)) {
 
-                    stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
-                    stack.header.controlsContainer.prepend('<li class="alertCommands cogSettings"></li>');
-                    ReactDOM.render(buttonInstance, stack.header.controlsContainer.children('.cogSettings')[0]);
-                }
                 if (contentItem.config.component == 'Search Criteria') {
 
                     stack.header.controlsContainer.prepend('<li class="alertCommands "><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span></li>');
@@ -305,7 +217,11 @@ export default class MainLayout extends Component {
                     ReactDOM.render(searchWindow, stack.header.controlsContainer.children('.cogSettings')[0]);
                 }
             });
-
+            layout.on('itemCreated', function (item) {
+                if (item.config.cssClass) {
+                    item.element.addClass(item.config.cssClass);
+                }
+            });
             /*
              * Accessing the container and updating its state
              */
@@ -313,7 +229,7 @@ export default class MainLayout extends Component {
         });
 
         layout.init()
-        this.setState({layout});
+
     }
 
     render() {
