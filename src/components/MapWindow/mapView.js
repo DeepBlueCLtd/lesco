@@ -184,14 +184,14 @@ export default class MapWindow extends Component {
 
         function updateData() {
             if (me.state.addCluster) {
-                const total = Math.random() * markers.lenght / 2;
+                const total = Math.random() * markers.length / 2;
                 for (let i = 0; i < total; i++) {
-                    markers.splice(Math.floor(Math.random() * markers.lenght), 1)
+                    markers.splice(Math.floor(Math.random() * markers.length), 1)
                 }
-                populate(map, Math.random() * 200);
+                populate(map, Math.random() * 20);
             }
             setTimeout(updateData
-                , Math.random() * 3000);
+                , 1000 +  Math.random() * 3000);
         }
         updateData();
         map.addLayer(markers);
