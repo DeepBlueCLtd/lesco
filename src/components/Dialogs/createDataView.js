@@ -52,7 +52,7 @@ export default class createDataViewDialog extends Component {
                     showCancelLink: true
                 });
                 tour.addStep('showtable', {
-                    text: 'The tabular presentation carries the most informtion',
+                    text: 'The tabular presentation carries the most information',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.btnTable), on: 'right' },
                     showCancelLink: true
                 });
@@ -72,7 +72,7 @@ export default class createDataViewDialog extends Component {
                     showCancelLink: true
                 })
                 tour.addStep('showNameLabel', {
-                    text: 'Here you name the new view, to help organise your screen. Go on, call it \'M25 within last hour\'',
+                    text: 'Here you name the new view, to help organise your screen. So, you could call it \'M25 within last hour\'',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.viewName), on: 'top' },
                     showCancelLink: true
                 })
