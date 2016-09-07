@@ -180,7 +180,7 @@ export default class QueryBuilderWindow extends Component {
                 showCancelLink: true
             })
             tour.addStep('querywindow', {
-                text: 'Create your query using logical operations. Have a go at requesting data within the M25',
+                text: 'Create your query using logical operations. Have a go at specifying that you only data within the M25',
                 attachTo: { element: this.refs.queryData, on: 'right' },
                 showCancelLink: true
             })
@@ -190,7 +190,7 @@ export default class QueryBuilderWindow extends Component {
                 showCancelLink: true
             })
             tour.addStep('querywindow', {
-                text: 'But, first have a go at adding an new rule, and specifying that you wish to see data from the last hour (clue: it\'s the time field)',
+                text: 'Let\'s make the query bit more complex. Have a go at adding an new rule, and then specifying that you only wish to see data from the last hour (clue: it\'s the time field)',
                 attachTo: { element: this.refs.queryData, on: 'right' },
                 showCancelLink: true
             })

@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 
 
 function FieldGroup({ id, label, help, ...props, onChange }) {
-
     return (
         <FormGroup controlId={id}>
             <ControlLabel>{label}</ControlLabel>
@@ -16,8 +15,29 @@ function FieldGroup({ id, label, help, ...props, onChange }) {
 }
 const buttonStyle = { fontSize: '250%', color: '#1B75BB' };
 export default class createDataViewDialog extends Component {
+    constructor(props) {
+        super(props);
+        this.handleSelect = this.handleSelect.bind(this);
+        this.state = { key: 1 };
+    }
+    handleSelect(key) {
+        const me = this;
+        const tour = this.props.tour;
+        this.setState({ key });
+        if (key == 2 && this.props.tour.getCurrentStep().id == 'existingView') {
+            setTimeout(() => {
+                const step = tour.getById('selectMap');
+                step.options.attachTo = {
+                    element: $(me.refs.anchor),
+                    on: 'right'
+                }
+                tour.next();
+            }, 200);
+        }
+    }
     componentDidMount() {
         const tour = this.props.tour;
+        const me = this;
         if (tour != null) {
 
             if (tour.getById('showDatTypes') == null) {
@@ -52,7 +72,7 @@ export default class createDataViewDialog extends Component {
                     showCancelLink: true
                 })
                 tour.addStep('showNameLabel', {
-                    text: 'Here you name the new view, to help organise your screen. Go on, call it \'M25 within last hour\'',
+                    text: 'Here you name the new view, to help organise your screen. So, you could call it \'M25 within last hour\'',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.viewName), on: 'top' },
                     showCancelLink: true
                 })
@@ -67,13 +87,30 @@ export default class createDataViewDialog extends Component {
                     showCancelLink: true
                 })
                 tour.addStep('existingView', {
-                    text: 'Alternatively, you may wish to add the data results to an existing map or table',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' },
+                    text: 'But, we\'re not going to do that.  We\'re going to add it to an existing plot. So, click on "Add to existing"',
+                    attachTo: { element: $('#dialogTab-tab-2'), on: 'left' },
+                    showCancelLink: true,
+                    buttons: [],
+                    when: {
+                        hide: function () {
+                            const step = tour.getById('selectMap');
+                            step.options.attachTo = {
+                                element: ReactDOM.findDOMNode(me.refs.anchor),
+                                on: 'right'
+                            }
+                        }
+                    }
+                })
+
+                tour.addStep('selectMap', {
+                    text: 'Ok, now select the Map panel - since that\'s how we want to view it',
+                    attachTo: '#anchorSelect', //this is defered to the render method so the step is updated when the tab shows
                     showCancelLink: true
+
                 })
                 tour.addStep('finish', {
-                    text: 'Ok, that\'s the end of the walkthrough. Why not close this panel and have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
-                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' },
+                    text: 'Ok, next you can click on \'Confirm\' to add the data.  That will be the end of the walkthrough. Why not have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
+                    attachTo: { element: $('.btn-success'), on: 'right' },
                     showCancelLink: true
                 })
 
@@ -83,8 +120,7 @@ export default class createDataViewDialog extends Component {
         }
     }
     render() {
-        const me = this;
-        return (<Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+        return (<Tabs id="dialogTab" activeKey={this.state.key} onSelect={this.handleSelect}>
             <Tab eventKey={1} title="New View">
                 <Grid fluid>
                     <Row className="show-grid">
@@ -121,6 +157,7 @@ export default class createDataViewDialog extends Component {
             </Tab>
             <Tab ref="tabExisting"  eventKey={2} title="Add to Existing">
                 <FormGroup controlId="formControlsSelectMultiple">
+
                     <ControlLabel>Multiple select</ControlLabel>
                     <FormControl componentClass="select" multiple onChange={(event) => this.props.onChange(event, 'existing') }>
                         {this.props.dataViews.map((x, index) => {

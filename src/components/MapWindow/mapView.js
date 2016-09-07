@@ -172,9 +172,9 @@ export default class MapWindow extends Component {
         const bounds = map.getBounds();
 
         function getRandomLatLng(map) {
-            const southWest = bounds.getSouthWest(),
-                northEast = bounds.getNorthEast(),
-                lngSpan = northEast.lng - southWest.lng,
+            const northEast =new MapApi.latLng(51.7049, -0.4807);
+            const southWest = new MapApi.latLng(51.3272, 0.2307);
+            const lngSpan = northEast.lng - southWest.lng,
                 latSpan = northEast.lat - southWest.lat;
             return new MapApi.LatLng(
                 southWest.lat + latSpan * Math.random(),
