@@ -67,12 +67,17 @@ export default class createDataViewDialog extends Component {
                     showCancelLink: true
                 })
                 tour.addStep('existingView', {
-                    text: 'Alternatively, you may wish to add the data results to an existing map or table',
+                    text: 'But, we\'re not going to do that.  We\'re going to add it to an existing plot. So, click on "Add to existing"',
+                    attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' },
+                    showCancelLink: true
+                })
+                tour.addStep('selectMap', {
+                    text: 'Ok, now select the Map panel - since that\'s how we want to view it',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'left' },
                     showCancelLink: true
                 })
                 tour.addStep('finish', {
-                    text: 'Ok, that\'s the end of the walkthrough. Why not close this panel and have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
+                    text: 'Ok, next you can click on \'Confirm\' to add the data.  That will be the end of the walkthrough. Why not have a go at re-organising the dummy views. Pick them up by their title and drag them onto another, or alongside another.',
                     attachTo: { element: ReactDOM.findDOMNode(this.refs.typeOfDataView), on: 'right' },
                     showCancelLink: true
                 })
