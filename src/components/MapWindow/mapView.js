@@ -112,8 +112,9 @@ class MapControls extends Component {
 
 
 export default class MapWindow extends Component {
-    constructor() {
-        super();
+    constructor(prop) {
+        super(prop);
+        this.state = { addCluster: false };
     }
 
     createCustomControls(map) {
@@ -136,9 +137,13 @@ export default class MapWindow extends Component {
 
     }
 
+    addClusterData() {
+        console.warn("cluster enable");
+        this.setState({ addCluster: true })
+    }
+
     componentDidMount() {
         const GlContainer = this.props.glContainer;
-
         const map = MapApi.map(this.refs.mapContainer, {
             minZoom: 2,
             maxZoom: 20,
@@ -154,8 +159,6 @@ export default class MapWindow extends Component {
         map.invalidateSize();
         map.setView(MapApi.latLng(51.56, -0.06), 9);
         this.createCustomControls(map);
-
-
         const markers = new MapApi.MarkerClusterGroup();
         const markersList = [];
         function populate(map, count) {
@@ -167,8 +170,8 @@ export default class MapWindow extends Component {
             return false;
         }
         const bounds = map.getBounds();
-        function getRandomLatLng(map) {
 
+        function getRandomLatLng(map) {
             const southWest = bounds.getSouthWest(),
                 northEast = bounds.getNorthEast(),
                 lngSpan = northEast.lng - southWest.lng,
@@ -177,16 +180,16 @@ export default class MapWindow extends Component {
                 southWest.lat + latSpan * Math.random(),
                 southWest.lng + lngSpan * Math.random());
         }
-
+        const me = this;
 
         function updateData() {
-
-            const total = Math.random() * markers.lenght / 2;
-            for (let i = 0; i < total; i++) {
-                markers.splice(Math.floor(Math.random() * markers.lenght), 1)
+            if (me.state.addCluster) {
+                const total = Math.random() * markers.lenght / 2;
+                for (let i = 0; i < total; i++) {
+                    markers.splice(Math.floor(Math.random() * markers.lenght), 1)
+                }
+                populate(map, Math.random() * 200);
             }
-
-            populate(map, Math.random() * 200);
             setTimeout(updateData
                 , Math.random() * 3000);
         }

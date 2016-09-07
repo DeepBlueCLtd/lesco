@@ -83,6 +83,7 @@ export default class createDataViewDialog extends Component {
         }
     }
     render() {
+        const me = this;
         return (<Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="New View">
                 <Grid fluid>
@@ -103,9 +104,8 @@ export default class createDataViewDialog extends Component {
                             <div>
                                 <Well bsSize="large">
                                     <h5>Configure View</h5>
-
                                     <FormGroup ref='viewName'>
-                                        <FieldGroup  label="View Name"  type="text" onChange={this.props.onChange}/>
+                                        <FieldGroup  label="View Name"  type="text" onChange={ (event) => this.props.onChange(event, 'new') }/>
                                         <Checkbox checked ref='chkUpdates'  >
                                             Receive Updates
                                         </Checkbox>
@@ -122,12 +122,13 @@ export default class createDataViewDialog extends Component {
             <Tab ref="tabExisting"  eventKey={2} title="Add to Existing">
                 <FormGroup controlId="formControlsSelectMultiple">
                     <ControlLabel>Multiple select</ControlLabel>
-                    <FormControl componentClass="select" multiple>
-                        <option value="select">Map View: London Airports</option>
-                        <option value="other">Table View: User Feed</option>
+                    <FormControl componentClass="select" multiple onChange={(event) => this.props.onChange(event, 'existing') }>
+                        {this.props.dataViews.map((x, index) => {
+                            return (<option key={index} value={index}>{x.config.title}</option>)
+                        }) }
                     </FormControl>
                 </FormGroup>
             </Tab>
-        </Tabs>)
+        </Tabs >)
     }
 }

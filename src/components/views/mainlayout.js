@@ -71,7 +71,7 @@ const layoutConfig = {
                         type: 'react-component',
                         component: 'Search Criteria',
                         title: 'Search Criteria',
-                        cssClass : 'scroll'
+                        cssClass: 'scroll'
                     }]
                 },
                 {
@@ -95,19 +95,22 @@ const layoutConfig = {
                         content: [{
                             type: 'react-component',
                             component: 'Map',
-                            title: 'Map'
+                            title: 'Map',
+                            isDataView: true
                         }, {
                                 type: 'react-component',
                                 component: 'Table',
                                 title: 'Table',
                                 props: { data: table1Data },
-                                cssClass : 'scroll'
+                                cssClass: 'scroll',
+                                isDataView: true
                             }, {
                                 type: 'react-component',
                                 component: 'Table',
                                 title: 'Table 2',
                                 props: { data: table2Data },
-                                cssClass : 'scroll'
+                                cssClass: 'scroll',
+                                isDataView: true
                                 // }, {
                                 //     type: 'react-component',
                                 //     component: 'Cloud',
