@@ -89,7 +89,7 @@ export default class TableAlert extends Component {
     render() {
         var settings = {
             multiColumnSort: true,
-
+              defaultColumnWidth: 125,
             rowHeight: 26
         };
         return (
