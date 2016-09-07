@@ -236,17 +236,36 @@ export default class QueryBuilderWindow extends Component {
     }
     createViewWindow() {
         const layoutManager = this.props.glContainer.layoutManager;
-        const newItemConfig = {
-            type: 'react-component',
-            component: 'Histogram',
-            title: this.state.viewTitle
+       
+        if (this.state.addType != 'existing') {
+            const newItemConfig = {
+                type: 'react-component',
+                component: 'Histogram',
+                title: this.state.viewTitle,
+                isDataView: true
 
-        };
-        layoutManager.root.contentItems[0].addChild(newItemConfig);
+            };
+            layoutManager.root.contentItems[0].addChild(newItemConfig);
+        }
+        else {
+            const dataViews = this.findDataViews();
+            const view = dataViews[this.state.viewTitle];
+            if (  view.config.component == 'Map') {          
+                const reactElement = view.instance._reactComponent;
+                reactElement.addClusterData();
+            }
+            //Need to find the correct window 
+        }
         this.close();
     }
 
+    findDataViews() {
+        return this.props.glContainer.layoutManager.root.contentItems[0].getItemsByFilter((item) => {
+            return (item.config.isDataView == true);
+        });
+    }
     render() {
+        var dataViews = this.findDataViews();
         const {showModalView, showModalAlert} = this.state;
         return (
             <div  ref="mainWindow" style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -287,7 +306,7 @@ export default class QueryBuilderWindow extends Component {
                             <Title>Create Data View</Title>
                         </Header>
                         <Body>
-                            <CreateDataViewDialog  tour={this.state.tour} onChange={(data) => { this.setState({ viewTitle: data.target.value }) } }/>
+                            <CreateDataViewDialog  dataViews= {dataViews} tour={this.state.tour} onChange={(event, type) => { this.setState({ viewTitle: event.target.value, addType: type }) } }/>
                         </Body>
                         <Footer>
                             <Button  bsStyle="success"onClick={this.createViewWindow}>Confirm</Button>
@@ -299,7 +318,7 @@ export default class QueryBuilderWindow extends Component {
                             <Title>Create Alert</Title>
                         </Header>
                         <Body>
-                            <CreateAlertViewDialog tour={this.state.tour} onChange={(data) => { this.setState({ viewTitle: data.target.value }) } }/>
+                            <CreateAlertViewDialog tour={this.state.tour} onChange={(event, type) => { this.setState({ viewTitle: event.target.value, addType: type }) } }/>
                         </Body>
                         <Footer>
                             <Button  bsStyle="success"onClick={this.createAlertWindow}>Confirm</Button>

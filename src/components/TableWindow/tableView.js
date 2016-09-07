@@ -31,6 +31,8 @@ export default class TableView extends Component {
        
     }
 
+   
+
     resizeGrid(grid) {
         grid.resizeCanvas();
         grid.autosizeColumns();

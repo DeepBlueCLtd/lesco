@@ -140,9 +140,8 @@ export default class createDataViewDialog extends Component {
                             <div>
                                 <Well bsSize="large">
                                     <h5>Configure View</h5>
-
                                     <FormGroup ref='viewName'>
-                                        <FieldGroup  label="View Name"  type="text" onChange={this.props.onChange}/>
+                                        <FieldGroup  label="View Name"  type="text" onChange={ (event) => this.props.onChange(event, 'new') }/>
                                         <Checkbox checked ref='chkUpdates'  >
                                             Receive Updates
                                         </Checkbox>
@@ -160,9 +159,10 @@ export default class createDataViewDialog extends Component {
                 <FormGroup controlId="formControlsSelectMultiple">
 
                     <ControlLabel>Multiple select</ControlLabel>
-                    <FormControl ref= 'anchor'  componentClass="select" multiple>
-                        <option value="select">Map View: London Airports</option>
-                        <option value="other">Table View: User Feed</option>
+                    <FormControl componentClass="select" multiple onChange={(event) => this.props.onChange(event, 'existing') }>
+                        {this.props.dataViews.map((x, index) => {
+                            return (<option key={index} value={index}>{x.config.title}</option>)
+                        }) }
                     </FormControl>
                 </FormGroup>
             </Tab>

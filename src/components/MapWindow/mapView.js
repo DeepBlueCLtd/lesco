@@ -112,8 +112,9 @@ class MapControls extends Component {
 
 
 export default class MapWindow extends Component {
-    constructor() {
-        super();
+    constructor(prop) {
+        super(prop);
+        this.state = { addCluster: false };
     }
 
     createCustomControls(map) {
@@ -136,14 +137,18 @@ export default class MapWindow extends Component {
 
     }
 
+    addClusterData() {
+        console.warn("cluster enable");
+        this.setState({ addCluster: true })
+    }
+
     componentDidMount() {
         const GlContainer = this.props.glContainer;
-      
         const map = MapApi.map(this.refs.mapContainer, {
             minZoom: 2,
             maxZoom: 20,
-            worldCopyJump : true,
-            center:  MapApi.latLng(51.56, -0.06),
+            worldCopyJump: true,
+            center: MapApi.latLng(51.56, -0.06),
             layers: [
                 MapApi.tileLayer(
                     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -154,31 +159,41 @@ export default class MapWindow extends Component {
         map.invalidateSize();
         map.setView(MapApi.latLng(51.56, -0.06), 9);
         this.createCustomControls(map);
-
-
         const markers = new MapApi.MarkerClusterGroup();
         const markersList = [];
-        function populate(map) {
-            for (let i = 0; i < 1000; i++) {
+        function populate(map, count) {
+            for (let i = 0; i < count; i++) {
                 const m = new MapApi.Marker(getRandomLatLng(map));
                 markersList.push(m);
                 markers.addLayer(m);
             }
             return false;
         }
-       
+        const bounds = map.getBounds();
+
         function getRandomLatLng(map) {
-            const bounds = map.getBounds(),
-                southWest = bounds.getSouthWest(),
-                northEast = bounds.getNorthEast(),
-                lngSpan = northEast.lng - southWest.lng,
+            const northEast =new MapApi.latLng(51.7049, -0.4807);
+            const southWest = new MapApi.latLng(51.3272, 0.2307);
+            const lngSpan = northEast.lng - southWest.lng,
                 latSpan = northEast.lat - southWest.lat;
             return new MapApi.LatLng(
                 southWest.lat + latSpan * Math.random(),
                 southWest.lng + lngSpan * Math.random());
         }
+        const me = this;
 
-        populate(map);
+        function updateData() {
+            if (me.state.addCluster) {
+                const total = Math.random() * markers.length / 2;
+                for (let i = 0; i < total; i++) {
+                    markers.splice(Math.floor(Math.random() * markers.length), 1)
+                }
+                populate(map, Math.random() * 20);
+            }
+            setTimeout(updateData
+                , 1000 +  Math.random() * 3000);
+        }
+        updateData();
         map.addLayer(markers);
 
         GlContainer.on('resize', () => {
