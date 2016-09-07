@@ -138,12 +138,12 @@ export default class MapWindow extends Component {
 
     componentDidMount() {
         const GlContainer = this.props.glContainer;
-      
+
         const map = MapApi.map(this.refs.mapContainer, {
             minZoom: 2,
             maxZoom: 20,
-            worldCopyJump : true,
-            center:  MapApi.latLng(51.56, -0.06),
+            worldCopyJump: true,
+            center: MapApi.latLng(51.56, -0.06),
             layers: [
                 MapApi.tileLayer(
                     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -158,18 +158,18 @@ export default class MapWindow extends Component {
 
         const markers = new MapApi.MarkerClusterGroup();
         const markersList = [];
-        function populate(map) {
-            for (let i = 0; i < 1000; i++) {
+        function populate(map, count) {
+            for (let i = 0; i < count; i++) {
                 const m = new MapApi.Marker(getRandomLatLng(map));
                 markersList.push(m);
                 markers.addLayer(m);
             }
             return false;
         }
-       
+        const bounds = map.getBounds();
         function getRandomLatLng(map) {
-            const bounds = map.getBounds(),
-                southWest = bounds.getSouthWest(),
+
+            const southWest = bounds.getSouthWest(),
                 northEast = bounds.getNorthEast(),
                 lngSpan = northEast.lng - southWest.lng,
                 latSpan = northEast.lat - southWest.lat;
@@ -178,7 +178,19 @@ export default class MapWindow extends Component {
                 southWest.lng + lngSpan * Math.random());
         }
 
-        populate(map);
+
+        function updateData() {
+
+            const total = Math.random() * markers.lenght / 2;
+            for (let i = 0; i < total; i++) {
+                markers.splice(Math.floor(Math.random() * markers.lenght), 1)
+            }
+
+            populate(map, Math.random() * 200);
+            setTimeout(updateData
+                , Math.random() * 3000);
+        }
+        updateData();
         map.addLayer(markers);
 
         GlContainer.on('resize', () => {
